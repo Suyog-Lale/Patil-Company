@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react';
-import { NAV_LINKS, LOGO_BASE64 } from '../constants';
-
+import React, { useState, useEffect } from "react";
+import { NAV_LINKS, LOGO_BASE64 } from "../constants";
+import logo from "@/assets/logo.jpeg";
 const Header: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
@@ -9,18 +9,28 @@ const Header: React.FC = () => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 10);
     };
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   return (
-    <header className={`sticky top-0 z-50 transition-all duration-300 ${isScrolled ? 'bg-white shadow-md' : 'bg-transparent'}`}>
+    <header
+      className={`sticky top-0 z-50 transition-all duration-300 ${
+        isScrolled ? "bg-white shadow-md" : "bg-transparent"
+      }`}
+    >
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-20">
           <div className="flex-shrink-0">
             <a href="#home" className="flex items-center gap-3">
-              <img className="h-16 w-auto" src={LOGO_BASE64} alt="Patil and Company (P and Co) Logo" />
-              <span className="font-bold text-xl text-gray-800 hidden sm:inline-block">Patil and Company</span>
+              <img
+                className="h-16 w-auto"
+                src={logo}
+                alt="Patil and Company (P and Co) Logo"
+              />
+              <span className="font-bold text-xl text-gray-800 hidden sm:inline-block">
+                Patil and Company
+              </span>
             </a>
           </div>
           <div className="hidden md:block">
@@ -51,7 +61,7 @@ const Header: React.FC = () => {
               aria-expanded="false"
             >
               <span className="sr-only">Open main menu</span>
-              <i data-lucide={isOpen ? 'x' : 'menu'}></i>
+              <i data-lucide={isOpen ? "x" : "menu"}></i>
             </button>
           </div>
         </div>
