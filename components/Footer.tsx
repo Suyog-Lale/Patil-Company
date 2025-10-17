@@ -1,5 +1,6 @@
 import React from 'react';
-import { LOGO_BASE64, NAV_LINKS } from '../constants';
+import { NAV_LINKS } from '../constants';
+import logo from "../assets/logo.jpeg";
 
 const Footer: React.FC = () => {
   return (
@@ -9,7 +10,7 @@ const Footer: React.FC = () => {
           {/* Column 1: Logo and Mission */}
           <div className="md:col-span-2">
             <div className="flex items-center gap-4 mb-4">
-              <img src={LOGO_BASE64} alt="Patil and Company (P and Co) Logo" className="h-16 bg-white p-2 rounded" />
+              <img src={logo} alt="Patil and Company (P and Co) Logo" className="h-16 bg-white p-2 rounded" />
               <span className="font-semibold text-white text-lg">Patil and Company (P and Co)</span>
             </div>
             <p className="text-sm text-gray-400 max-w-md">
