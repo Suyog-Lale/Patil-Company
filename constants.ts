@@ -3,9 +3,9 @@ import {
   ServiceCategory,
   Client,
   Project,
-  ProjectCategory,
-} from "./types";
+} from "./types"; // Removed ProjectCategory as it's not used
 import imag from "@/assets/image.png"
+
 // Fixed: Using a proper placeholder logo or you can replace with your actual logo URL
 export const LOGO_BASE64 =
   "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjQiIGhlaWdodD0iNjQiIHZpZXdCb3g9IjAgMCA2NCA2NCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KICA8cmVjdCB3aWR0aD0iNjQiIGhlaWdodD0iNjQiIHJ4PSI4IiBmaWxsPSIjRUFCMzA4Ii8+CiAgPHRleHQgeD0iNTAlIiB5PSI1MCUiIGZvbnQtc2l6ZT0iMjQiIGZvbnQtd2VpZ2h0PSJib2xkIiBmaWxsPSJ3aGl0ZSIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZG9taW5hbnQtYmFzZWxpbmU9Im1pZGRsZSI+UEM8L3RleHQ+Cjwvc3ZnPg==";
@@ -16,6 +16,7 @@ export const NAV_LINKS: NavLink[] = [
   { name: "Services", href: "#services" },
   { name: "Clients", href: "#clients" },
   { name: "Projects", href: "#projects" },
+  { name: "Policies", href: "#policies" }, // This is correct
 ];
 
 export const SERVICE_CATEGORIES: ServiceCategory[] = [
@@ -203,7 +204,7 @@ export const PROJECTS: Project[] = [
       "Ongoing structural and repair work for a major steel manufacturing facility.",
     category: "Industrial",
     imageUrl:
-     imag,
+      imag,
   },
   {
     id: 2,

@@ -7,6 +7,7 @@ import Clients from "./components/Clients";
 import Projects from "./components/Projects";
 import Contact from "./components/Contact";
 import Footer from "./components/Footer";
+import Policies from './components/Policies';
 
 // Define the type for the lucide object on the window
 declare global {
@@ -23,7 +24,7 @@ const App: React.FC = () => {
       window.lucide.createIcons();
     }
 
-    // Smooth scroll for anchor links to fix navigation issues in sandboxed environments
+    // Smooth scroll for anchor links
     const handleNavClick = (event: MouseEvent) => {
       const target = event.target as HTMLElement;
       const anchor = target.closest('a[href^="#"]');
@@ -60,6 +61,7 @@ const App: React.FC = () => {
         <Clients />
         <Projects />
         <Contact />
+        <Policies />
       </main>
       <Footer />
     </div>
