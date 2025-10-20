@@ -198,7 +198,7 @@ const Header: React.FC<{ onNavigate: (page: string) => void, currentPage: string
                 <div className="flex items-center justify-between h-20">
                     <div className="flex-shrink-0">
                         <a href="/" onClick={(e) => handleLinkClick(e, '/')} className="flex items-center gap-3">
-                            <img className="h-16 w-auto" src="/assets/logo.jpeg" alt="Patil and Company (P and Co) Logo" />
+                            <img className="h-16 w-auto" src= {logo} alt="Patil and Company (P and Co) Logo" />
                             <span className="font-bold text-xl text-gray-800 hidden sm:inline-block">Patil and Company</span>
                         </a>
                     </div>
