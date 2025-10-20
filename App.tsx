@@ -1,4 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
+import imag from "@/assets/image.png";
+import logo from "@/assets/logo.jpeg";
 
 // --- TYPES (from types.ts) ---
 interface NavLink {
@@ -116,7 +118,7 @@ const SERVICE_CATEGORIES: ServiceCategory[] = [
 ];
 
 const CLIENTS: Client[] = [
-    { name: "AM/NS India", logo: "https://travel.amns.in/static/media/amns_transparent.bf237bba696c0751e0b1.png", type: "completed" },
+    { name: "AM/NS India", logo: {imag}, type: "completed" },
     { name: "Pepsico International - Frito Lay", logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a6/PepsiCo_logo.svg/1200px-PepsiCo_logo.svg.png", type: "completed" },
     { name: "H & R. Johnson (I.) Limited", logo: "https://d2ki7eiqd260sq.cloudfront.net/CORPORATE-LOGO-NEW6130d7d5-8c2c-41c1-8918-e01f2fa1be73.png", type: "completed" },
     { name: "Grindwell - Nortan", logo: "https://companieslogo.com/img/orig/GRINDWELL.NS-155a919c.png?t=1720244492", type: "completed" },
@@ -139,7 +141,7 @@ const CLIENTS: Client[] = [
 ];
 
 const PROJECTS: Project[] = [
-    { id: 1, title: "AM/NS Steel Plant Expansion", description: "Ongoing structural and repair work for a major steel manufacturing facility.", category: "Industrial", imageUrl: "/assets/image.png", },
+    { id: 1, title: "AM/NS Steel Plant Expansion", description: "Ongoing structural and repair work for a major steel manufacturing facility.", category: "Industrial", imageUrl: imag },
     { id: 2, title: "Corporate Office Renovation", description: "Complete interior and exterior overhaul for a commercial office building.", category: "Commercial", imageUrl: "https://images.unsplash.com/photo-1497366216548-37526070297c?w=800&auto=format&fit=crop&q=80", },
     { id: 3, title: "Luxury Residential Villa", description: "Ground-up construction of a high-end residential property with custom landscaping.", category: "Residential", imageUrl: "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=800&auto=format&fit=crop&q=80", },
     { id: 4, title: "Industrial Warehouse Flooring", description: "Installation of heavy-duty epoxy flooring for a high-traffic logistics center.", category: "Industrial", imageUrl: "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=800&auto=format&fit=crop&q=80", },
@@ -261,7 +263,7 @@ const Footer: React.FC<{ onNavigate: (page: string) => void }> = ({ onNavigate }
                 <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
                     <div className="md:col-span-2">
                         <div className="flex items-center gap-4 mb-4">
-                            <img src="/assets/logo.jpeg" alt="Patil and Company (P and Co) Logo" className="h-16 bg-white p-2 rounded" />
+                            <img src= {logo} alt="Patil and Company (P and Co) Logo" className="h-16 bg-white p-2 rounded" />
                             <span className="font-semibold text-white text-lg">Patil and Company (P and Co)</span>
                         </div>
                         <p className="text-sm text-gray-400 max-w-md">A legacy of excellence in construction, committed to delivering high-quality residential, commercial, and industrial projects with integrity and reliability.</p>
