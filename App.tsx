@@ -37,12 +37,13 @@ interface Project {
 
 // --- CONSTANTS (from constants.ts) ---
 // Using page paths for hash routing
+// UPDATED: Removed Projects and Policies
 const NAV_LINKS: NavLink[] = [
   { name: "Home", href: "/" },
   { name: "Services", href: "/services" },
   { name: "Clients", href: "/clients" },
-  { name: "Projects", href: "/projects" },
-  { name: "Policies", href: "/policies" },
+  // { name: "Projects", href: "/projects" }, // Removed
+  // { name: "Policies", href: "/policies" }, // Removed
 ];
 
 const SERVICE_CATEGORIES: ServiceCategory[] = [
@@ -266,7 +267,16 @@ const Footer: React.FC<{ onNavigate: (page: string) => void }> = ({ onNavigate }
     };
 
     // Add "Contact" to the footer links
-    const footerLinks = [...NAV_LINKS, { name: "Contact", href: "/contact" }];
+    // NOTE: This includes Projects and Policies from the original NAV_LINKS before modification
+    const originalNavLinksPlusContact = [
+        { name: "Home", href: "/" },
+        { name: "Services", href: "/services" },
+        { name: "Clients", href: "/clients" },
+        { name: "Projects", href: "/projects" }, // Keep in footer
+        { name: "Policies", href: "/policies" }, // Keep in footer
+        { name: "Contact", href: "/contact" }
+    ];
+
 
     return (
         <footer className="bg-gray-800 text-gray-400 border-t border-gray-700">
@@ -282,14 +292,15 @@ const Footer: React.FC<{ onNavigate: (page: string) => void }> = ({ onNavigate }
                             className="h-12 bg-white p-1 rounded-md"
                         />
                         <p className="ml-4 text-sm">
-                            &copy; Patil and Company (P and Co).
+                            &copy; {new Date().getFullYear()} Patil and Company (P and Co).
                         </p>
                     </div>
 
                     {/* Right Side: Horizontal Quick Links */}
                     <nav>
                         <ul className="flex flex-wrap justify-center sm:justify-end items-center space-x-4 sm:space-x-6">
-                            {footerLinks.map(link => (
+                            {/* Use the extended list including Projects/Policies for the footer */}
+                            {originalNavLinksPlusContact.map(link => (
                                 <li key={link.name}>
                                     <a
                                         href={link.href}
