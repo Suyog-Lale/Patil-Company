@@ -322,18 +322,42 @@ const Footer: React.FC<{ onNavigate: (page: string) => void }> = ({ onNavigate }
 // --- END OF UPDATED FOOTER ---
 
 
-const Hero: React.FC = () => (
-    <section id="home" className="relative h-screen flex items-center justify-center text-white">
-        <div className="absolute inset-0 bg-black opacity-60 z-10"></div>
-        <div className="absolute inset-0 overflow-hidden">
-            <img src="https://images.unsplash.com/photo-1541888946425-d81bb19240f5?q=80&w=2070&auto=format&fit=crop" alt="Large-scale construction site" className="w-full h-full object-cover" />
-        </div>
-        <div className="relative z-20 text-center px-4">
-            <h1 className="text-4xl md:text-6xl font-extrabold mb-4 leading-tight drop-shadow-lg">A Legacy of Excellence in Construction</h1>
-            <p className="text-md md:text-lg max-w-3xl mx-auto mb-8 drop-shadow-lg">Executing residential, commercial, and industrial projects with a commitment to quality, safety, and reliability.</p>
-        </div>
-    </section>
-);
+// --- CORRECTED HERO COMPONENT ---
+const Hero: React.FC<{ onNavigate: (page: string) => void }> = ({ onNavigate }) => {
+    const handleLinkClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+        e.preventDefault();
+        onNavigate(href);
+    };
+
+    return (
+        <section id="home" className="relative h-screen flex items-center justify-center text-white">
+            <div className="absolute inset-0 bg-black opacity-60 z-10"></div>
+            <div className="absolute inset-0 overflow-hidden">
+                <img src="https://images.unsplash.com/photo-1541888946425-d81bb19240f5?q=80&w=2070&auto=format&fit=crop" alt="Large-scale construction site" className="w-full h-full object-cover" />
+            </div>
+            <div className="relative z-20 text-center px-4">
+                <h1 className="text-4xl md:text-6xl font-extrabold mb-4 leading-tight drop-shadow-lg"> {/* Reduced bottom margin here for spacing */}
+                    A Legacy of Excellence in Construction
+                </h1>
+                {/* --- RESTORED THE DESCRIPTIVE LINE --- */}
+                <p className="text-lg md:text-xl text-gray-200 mb-8 max-w-2xl mx-auto drop-shadow-md">
+                    Executing residential, commercial, and industrial projects with a commitment to quality,
+                    safety, and reliability.
+                </p>
+                {/* --- SHORTENED THE BUTTON SIZE --- */}
+                <a
+                    href="/about" // Use the target page path
+                    onClick={(e) => handleLinkClick(e, '/about')}
+                    className="inline-block bg-yellow-600 text-white px-6 py-2 rounded-md text-base font-semibold hover:bg-yellow-700 transition-colors shadow-md"
+                >
+                    Learn More About Us
+                </a>
+            </div>
+        </section>
+    );
+};
+// --- END OF CORRECTED HERO ---
+
 
 const About: React.FC = () => {
     const sectionRef = useScrollAnimation<HTMLElement>();
@@ -364,12 +388,14 @@ const About: React.FC = () => {
 
 // --- PAGE COMPONENTS ---
 
-const HomePage: React.FC = () => (
+// --- FIX 1: Removed About from HomePage ---
+const HomePage: React.FC<{ onNavigate: (page: string) => void }> = ({ onNavigate }) => (
     <>
-        <Hero />
-        <About />
+        <Hero onNavigate={onNavigate} />
+        {/* <About /> */} {/* Removed About from here */}
     </>
 );
+
 
 const ServicesPage: React.FC = () => {
     const [activeTab, setActiveTab] = useState(0);
@@ -599,11 +625,15 @@ const App: React.FC = () => {
         // Use the currentPage state which is synced with the hash
         switch (currentPage) {
             case '/':
-                return <HomePage />;
+                // Pass handleNavigate down to HomePage so Hero can use it
+                return <HomePage onNavigate={handleNavigate} />;
             case '/services':
                 return <ServicesPage />;
             case '/clients':
                 return <ClientsPage />;
+            // --- FIX 2: Added /about case ---
+            case '/about': // Add this case
+                return <About />; // Render the About component
             case '/projects':
                 return <ProjectsPage />;
             case '/contact':
