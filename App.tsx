@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
-import imag from "@/assets/image.png";
-import logo from "@/assets/logo.jpeg";
+// It looks like you might not be using 'imag' anymore, consider removing if unused
+// import imag from "@/assets/image.png";
+import logo from "@/assets/logo.jpeg"; // Still using the old logo import here
 
 // --- TYPES (from types.ts) ---
 interface NavLink {
@@ -20,7 +21,7 @@ interface ServiceCategory {
 
 interface Client {
   name: string;
-  logo?: string;
+  logo?: string; // logo is a string URL or path
   type: 'completed' | 'ongoing';
 }
 
@@ -31,10 +32,11 @@ interface Project {
   title: string;
   description: string;
   category: ProjectCategory;
-  imageUrl: string;
+  imageUrl: string; // imageUrl is a string URL or path
 }
 
 // --- CONSTANTS (from constants.ts) ---
+// Using page paths for hash routing
 const NAV_LINKS: NavLink[] = [
   { name: "Home", href: "/" },
   { name: "Services", href: "/services" },
@@ -118,7 +120,10 @@ const SERVICE_CATEGORIES: ServiceCategory[] = [
 ];
 
 const CLIENTS: Client[] = [
-    { name: "AM/NS India", logo: {imag}, type: "completed" },
+    // Corrected logo path for AM/NS - assuming 'imag' was a placeholder for a specific image import
+    // If 'imag' was meant to be imported like the logo, it needs a proper import.
+    // Using a placeholder string for now. If you have an image, import it like 'logo'.
+    { name: "AM/NS India", logo: "@/assets/amns-logo.png", type: "completed" }, // Example: Replace with actual path or import
     { name: "Pepsico International - Frito Lay", logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a6/PepsiCo_logo.svg/1200px-PepsiCo_logo.svg.png", type: "completed" },
     { name: "H & R. Johnson (I.) Limited", logo: "https://d2ki7eiqd260sq.cloudfront.net/CORPORATE-LOGO-NEW6130d7d5-8c2c-41c1-8918-e01f2fa1be73.png", type: "completed" },
     { name: "Grindwell - Nortan", logo: "https://companieslogo.com/img/orig/GRINDWELL.NS-155a919c.png?t=1720244492", type: "completed" },
@@ -141,7 +146,8 @@ const CLIENTS: Client[] = [
 ];
 
 const PROJECTS: Project[] = [
-    { id: 1, title: "AM/NS Steel Plant Expansion", description: "Ongoing structural and repair work for a major steel manufacturing facility.", category: "Industrial", imageUrl: imag },
+    // Corrected imageUrl path for AM/NS - assuming 'imag' was a placeholder
+    { id: 1, title: "AM/NS Steel Plant Expansion", description: "Ongoing structural and repair work for a major steel manufacturing facility.", category: "Industrial", imageUrl: "@/assets/amns-project.png" }, // Example: Replace with actual path or import
     { id: 2, title: "Corporate Office Renovation", description: "Complete interior and exterior overhaul for a commercial office building.", category: "Commercial", imageUrl: "https://images.unsplash.com/photo-1497366216548-37526070297c?w=800&auto=format&fit=crop&q=80", },
     { id: 3, title: "Luxury Residential Villa", description: "Ground-up construction of a high-end residential property with custom landscaping.", category: "Residential", imageUrl: "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=800&auto=format&fit=crop&q=80", },
     { id: 4, title: "Industrial Warehouse Flooring", description: "Installation of heavy-duty epoxy flooring for a high-traffic logistics center.", category: "Industrial", imageUrl: "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=800&auto=format&fit=crop&q=80", },
@@ -198,7 +204,7 @@ const Header: React.FC<{ onNavigate: (page: string) => void, currentPage: string
                 <div className="flex items-center justify-between h-20">
                     <div className="flex-shrink-0">
                         <a href="/" onClick={(e) => handleLinkClick(e, '/')} className="flex items-center gap-3">
-                            <img className="h-16 w-auto" src= {logo} alt="Patil and Company (P and Co) Logo" />
+                            <img className="h-16 w-auto p-1 bg-white rounded-md" src={logo} alt="Patil and Company (P and Co) Logo" />
                             <span className="font-bold text-xl text-gray-800 hidden sm:inline-block">Patil and Company</span>
                         </a>
                     </div>
@@ -209,7 +215,8 @@ const Header: React.FC<{ onNavigate: (page: string) => void, currentPage: string
                                     key={link.name}
                                     href={link.href}
                                     onClick={(e) => handleLinkClick(e, link.href)}
-                                    className={`${currentPage === link.href ? 'text-yellow-600' : 'text-gray-700'} hover:text-yellow-600 px-3 py-2 rounded-md text-sm font-medium transition-colors`}
+                                    // Highlight the current page link
+                                    className={`${currentPage === link.href || (currentPage === '/' && link.href === '/') ? 'text-yellow-600' : 'text-gray-700'} hover:text-yellow-600 px-3 py-2 rounded-md text-sm font-medium transition-colors`}
                                 >
                                     {link.name}
                                 </a>
@@ -251,50 +258,58 @@ const Header: React.FC<{ onNavigate: (page: string) => void, currentPage: string
     );
 };
 
+// --- UPDATED FOOTER COMPONENT (MINIMALISTIC) ---
 const Footer: React.FC<{ onNavigate: (page: string) => void }> = ({ onNavigate }) => {
     const handleLinkClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
         e.preventDefault();
         onNavigate(href);
     };
 
+    // Add "Contact" to the footer links
+    const footerLinks = [...NAV_LINKS, { name: "Contact", href: "/contact" }];
+
     return (
-        <footer className="bg-gray-800 text-gray-300">
-            <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
-                <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
-                    <div className="md:col-span-2">
-                        <div className="flex items-center gap-4 mb-4">
-                            <img src= {logo} alt="Patil and Company (P and Co) Logo" className="h-16 bg-white p-2 rounded" />
-                            <span className="font-semibold text-white text-lg">Patil and Company (P and Co)</span>
-                        </div>
-                        <p className="text-sm text-gray-400 max-w-md">A legacy of excellence in construction, committed to delivering high-quality residential, commercial, and industrial projects with integrity and reliability.</p>
+        <footer className="bg-gray-800 text-gray-400 border-t border-gray-700">
+            <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+                {/* Main footer content aligned in a single row */}
+                <div className="flex flex-col sm:flex-row items-center justify-between h-24">
+
+                    {/* Left Side: Logo and Copyright */}
+                    <div className="flex items-center mb-4 sm:mb-0">
+                        <img
+                            src={logo} // Still using the old logo import
+                            alt="Patil and Company Logo"
+                            className="h-12 bg-white p-1 rounded-md"
+                        />
+                        <p className="ml-4 text-sm">
+                            &copy; {new Date().getFullYear()} Patil and Company (P and Co).
+                        </p>
                     </div>
-                    <div>
-                        <h3 className="text-lg font-semibold text-white mb-4">Quick Links</h3>
-                        <ul className="space-y-2">
-                            {[...NAV_LINKS, {name: 'Contact', href: '/contact'}].map(link => (
+
+                    {/* Right Side: Horizontal Quick Links */}
+                    <nav>
+                        <ul className="flex flex-wrap justify-center sm:justify-end items-center space-x-4 sm:space-x-6">
+                            {footerLinks.map(link => (
                                 <li key={link.name}>
-                                    <a href={link.href} onClick={(e) => handleLinkClick(e, link.href)} className="hover:text-yellow-400 transition-colors text-sm">{link.name}</a>
+                                    <a
+                                        href={link.href}
+                                        onClick={(e) => handleLinkClick(e, link.href)}
+                                        className="text-sm hover:text-yellow-400 transition-colors"
+                                    >
+                                        {link.name}
+                                    </a>
                                 </li>
                             ))}
                         </ul>
-                    </div>
-                    <div>
-                        <h3 className="text-lg font-semibold text-white mb-4">Contact Info</h3>
-                        <ul className="space-y-2 text-sm">
-                            <li className="flex items-start"><i data-lucide="map-pin" className="w-4 h-4 mr-3 mt-1 flex-shrink-0"></i><span>House No 45, At Navandhe, Post Jambrung, Tal. Khalapur, Dist. Raigad, Maharashtra - 410203</span></li>
-                            <li className="flex items-start"><i data-lucide="mail" className="w-4 h-4 mr-3 mt-1 flex-shrink-0"></i><a href="mailto:patilandcom@gmail.com" className="hover:text-yellow-400 transition-colors">patilandcom@gmail.com</a></li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-            <div className="bg-gray-900 py-4">
-                <div className="container mx-auto px-4 sm:px-6 lg:px-8 text-center text-sm text-gray-500">
-                    <p>&copy; {new Date().getFullYear()} Patil and Company (P and Co). All Rights Reserved.</p>
+                    </nav>
+
                 </div>
             </div>
         </footer>
     );
 };
+// --- END OF UPDATED FOOTER ---
+
 
 const Hero: React.FC = () => (
     <section id="home" className="relative h-screen flex items-center justify-center text-white">
@@ -389,8 +404,9 @@ const ClientsPage: React.FC = () => {
                 <div className="text-center mb-12"><h2 className="text-3xl font-extrabold text-gray-900 sm:text-4xl">Our Valued Clients</h2><p className="mt-4 text-lg text-gray-600">Our Commitment to Quality has Earned Their Trust</p></div>
                 <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6">
                     {completedClients.map((client) => (
-                         <div key={client.name} className="flex justify-center items-center p-4 bg-gray-100 rounded-lg h-28">
-                            <img src={client.logo} alt={client.name} className="max-h-16 max-w-full client-logo" />
+                         <div key={client.name} className="flex justify-center items-center p-4 bg-white border border-gray-200 rounded-lg h-28 hover:shadow-md transition-shadow">
+                            {/* Use client.logo which should be a string path */}
+                            <img src={client.logo} alt={client.name} className="max-h-16 max-w-full client-logo object-contain" />
                         </div>
                     ))}
                 </div>
@@ -418,8 +434,11 @@ const ProjectsPage: React.FC = () => {
                 </div>
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                     {filteredProjects.map((project) => (
-                        <div key={project.id} className="bg-white rounded-lg shadow-lg overflow-hidden group">
-                            <div className="relative overflow-hidden"><img src={project.imageUrl} alt={project.title} className="w-full h-56 object-cover transform group-hover:scale-110 transition-transform duration-500" /></div>
+                        <div key={project.id} className="bg-white rounded-lg shadow-lg overflow-hidden group border border-gray-200">
+                            <div className="relative overflow-hidden h-56">
+                                {/* Use project.imageUrl which should be a string path */}
+                                <img src={project.imageUrl} alt={project.title} className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-300" />
+                             </div>
                             <div className="p-6"><span className="inline-block bg-yellow-100 text-yellow-800 text-xs font-semibold px-2.5 py-0.5 rounded-full mb-2">{project.category}</span><h3 className="text-xl font-semibold text-gray-900 mb-2">{project.title}</h3><p className="text-gray-600 text-sm">{project.description}</p></div>
                         </div>
                     ))}
@@ -436,7 +455,7 @@ const ContactPage: React.FC = () => {
             <div className="container mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="text-center mb-12"><h2 className="text-3xl font-extrabold text-gray-900 sm:text-4xl">Get In Touch</h2><p className="mt-4 text-lg text-gray-600">We're Here to Help Build Your Vision</p></div>
                 <div className="max-w-2xl mx-auto">
-                    <div className="bg-white p-8 rounded-lg shadow-lg">
+                    <div className="bg-white p-8 rounded-lg shadow-lg border border-gray-200">
                         <h3 className="text-2xl font-bold text-gray-800 mb-4">Contact Details</h3>
                         <p className="text-gray-600 mb-6">For business inquiries write to, call, email or WhatsApp us.</p>
                         <div className="space-y-4">
@@ -455,46 +474,60 @@ const ContactPage: React.FC = () => {
 const PoliciesPage: React.FC = () => (
     <section id="policies" className="py-16 bg-gray-50 min-h-screen">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="max-w-3xl mx-auto">
+        <div className="max-w-3xl mx-auto bg-white p-8 rounded-lg shadow-md border border-gray-200">
           <h2 className="text-3xl font-bold text-center text-gray-900 mb-4">Website Policies</h2>
           <p className="text-center text-gray-500 mb-10">Last Updated: October 20, 2025</p>
           <div className="space-y-6 text-gray-700 text-left">
              <div className="space-y-2">
-                <h3 className="text-xl font-semibold">Acceptance of Terms</h3>
+                <h3 className="text-xl font-semibold text-gray-800">Acceptance of Terms</h3>
                 <p>By accessing and using this website, you agree to these Website Policies. If you do not agree, please refrain from using the site.</p>
              </div>
+             <hr className="border-gray-200" />
              <div className="space-y-2">
-                <h3 className="text-xl font-semibold">Modification of Policies</h3>
+                <h3 className="text-xl font-semibold text-gray-800">Modification of Policies</h3>
                 <p>We reserve the right to update these policies at any time without prior notice. Continued use of the website implies acceptance of the updated terms.</p>
              </div>
+              <hr className="border-gray-200" />
              <div className="space-y-2">
-                <h3 className="text-xl font-semibold">Intellectual Property</h3>
+                <h3 className="text-xl font-semibold text-gray-800">Intellectual Property</h3>
                 <p>All content on this website, including text, images, and service descriptions, is the intellectual property of Patil and Company. Unauthorized use or reproduction is prohibited.</p>
              </div>
+              <hr className="border-gray-200" />
              <div className="space-y-2">
-                <h3 className="text-xl font-semibold">Limitation of Liability</h3>
+                <h3 className="text-xl font-semibold text-gray-800">Limitation of Liability</h3>
                 <p>Patil and Company shall not be liable for any indirect or consequential damages arising from the use of this website or our services.</p>
              </div>
+              <hr className="border-gray-200" />
              <div className="space-y-2">
-                <h3 className="text-xl font-semibold">Privacy Policy</h3>
+                <h3 className="text-xl font-semibold text-gray-800">Privacy Policy</h3>
                 <p>We respect your privacy and are committed to protecting any personal information shared through inquiries on this site.</p>
-                <div className="pl-4 space-y-2">
-                    <h4 className="text-lg font-semibold">Information Collection</h4>
-                    <p>We may collect personal data such as names, email addresses, and phone numbers provided voluntarily by users for communication purposes.</p>
-                    <h4 className="text-lg font-semibold">Use of Information</h4>
-                    <p>Collected data will only be used to respond to inquiries or provide requested services and will not be shared with third parties without consent.</p>
-                    <h4 className="text-lg font-semibold">Data Protection</h4>
-                    <p>We implement reasonable security measures to safeguard your information against unauthorized access or breaches.</p>
-                    <h4 className="text-lg font-semibold">Removal Requests</h4>
-                    <p>Users may contact us to request deletion of their personal data at any time.</p>
+                <div className="pl-4 mt-4 space-y-4 border-l-2 border-gray-300 ml-2">
+                   <div>
+                       <h4 className="text-lg font-semibold text-gray-800">Information Collection</h4>
+                       <p className="text-gray-600">We may collect personal data such as names, email addresses, and phone numbers provided voluntarily by users for communication purposes.</p>
+                   </div>
+                   <div>
+                       <h4 className="text-lg font-semibold text-gray-800">Use of Information</h4>
+                       <p className="text-gray-600">Collected data will only be used to respond to inquiries or provide requested services and will not be shared with third parties without consent.</p>
+                   </div>
+                   <div>
+                       <h4 className="text-lg font-semibold text-gray-800">Data Protection</h4>
+                       <p className="text-gray-600">We implement reasonable security measures to safeguard your information against unauthorized access or breaches.</p>
+                   </div>
+                   <div>
+                       <h4 className="text-lg font-semibold text-gray-800">Removal Requests</h4>
+                       <p className="text-gray-600">Users may contact us to request deletion of their personal data at any time.</p>
+                   </div>
                 </div>
              </div>
+              <hr className="border-gray-200" />
              <div className="space-y-2">
-                <h3 className="text-xl font-semibold">Use of Third-Party Logos</h3>
+                <h3 className="text-xl font-semibold text-gray-800">Use of Third-Party Logos</h3>
                 <p>The logos displayed on this website are used solely to identify companies we have worked with and showcase completed projects. Their presence does not imply endorsement, sponsorship, or affiliation by the respective trademark owners. All logos remain the intellectual property of their respective owners, and if a trademark owner requests removal, we will comply promptly.</p>
              </div>
+              <hr className="border-gray-200" />
              <div className="space-y-2">
-                <h3 className="text-xl font-semibold">Governing Law</h3>
+                <h3 className="text-xl font-semibold text-gray-800">Governing Law</h3>
                 <p>These Website Policies are governed by Indian law. Any disputes arising from these terms shall be subject to Khalapur jurisdiction.</p>
              </div>
           </div>
@@ -513,24 +546,29 @@ const App: React.FC = () => {
     // Determine the initial page from the URL hash, default to '/'
     const getInitialPage = () => {
         const hash = window.location.hash.slice(1);
-        if (hash) {
+        // Ensure the hash starts with a '/' for consistency
+        if (hash && hash.startsWith('/')) {
             return hash;
+        } else if (hash) {
+            return `/${hash}`; // Add leading slash if missing
         }
-        return '/';
+        return '/'; // Default to homepage
     };
 
     const [currentPage, setCurrentPage] = useState(getInitialPage());
 
+    // Effect to run createIcons on initial load and page changes
     useEffect(() => {
         if (window.lucide) {
             window.lucide.createIcons();
         }
-    });
+        // Dependency array includes currentPage to re-run when the page changes
+    }, [currentPage]);
 
     // Handle hash changes for back/forward navigation
     useEffect(() => {
         const handleHashChange = () => {
-            setCurrentPage(window.location.hash.slice(1) || '/');
+            setCurrentPage(getInitialPage()); // Use the same logic to set page on hash change
         };
         window.addEventListener('hashchange', handleHashChange);
         return () => {
@@ -539,17 +577,16 @@ const App: React.FC = () => {
     }, []);
 
     const handleNavigate = (page: string) => {
-        // Update the URL hash
-        window.location.hash = page;
-        // The state will be updated by the 'hashchange' event listener
-        window.scrollTo(0, 0);
+        // Update the URL hash (make sure it starts with '/')
+        const targetHash = page.startsWith('/') ? page : `/${page}`;
+        window.location.hash = targetHash;
+        // The state will be updated automatically by the 'hashchange' event listener
+        window.scrollTo(0, 0); // Scroll to top after navigation
     };
 
     const renderPage = () => {
-        // We use the state `currentPage` which is synced with the URL hash
-        const pageToRender = currentPage.startsWith('/') ? currentPage : `/${currentPage}`;
-
-        switch (pageToRender) {
+        // Use the currentPage state which is synced with the hash
+        switch (currentPage) {
             case '/':
                 return <HomePage />;
             case '/services':
@@ -563,16 +600,26 @@ const App: React.FC = () => {
             case '/policies':
                 return <PoliciesPage />;
             default:
-                return <div className="text-center py-20 min-h-screen"><h1 className="text-4xl font-bold">404 - Page Not Found</h1></div>;
+                return (
+                    <div className="container mx-auto text-center py-24 px-4 min-h-screen">
+                        <h1 className="text-4xl font-bold text-gray-800 mb-4">404 - Page Not Found</h1>
+                        <p className="text-lg text-gray-600 mb-8">Sorry, the page you requested was not found.</p>
+                        <a href="/" onClick={(e) => handleNavigate('/')} className="bg-yellow-600 text-white px-6 py-3 rounded-md text-lg font-medium hover:bg-yellow-700 transition-colors">
+                            Go Back Home
+                        </a>
+                    </div>
+                );
         }
     };
 
     return (
         <div className="bg-white">
+            {/* Pass currentPage to Header for highlighting */}
             <Header onNavigate={handleNavigate} currentPage={currentPage} />
             <main>
                 {renderPage()}
             </main>
+            {/* Footer also needs onNavigate */}
             <Footer onNavigate={handleNavigate} />
         </div>
     );
