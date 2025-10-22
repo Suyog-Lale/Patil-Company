@@ -20,7 +20,7 @@ const Footer: React.FC = () => {
               className="h-12 bg-white p-1 rounded-md" 
             />
             <p className="ml-4 text-sm">
-              &copy; {new Date().getFullYear()} Patil and Company (P and Co).
+              &copy; Patil and Company (P and Co).
             </p>
           </div>
 
