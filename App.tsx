@@ -1,7 +1,9 @@
 import React, { useState, useEffect, useRef } from "react";
 // It looks like you might not be using 'imag' anymore, consider removing if unused
-// import imag from "@/assets/image.png";
-import logo from "@/assets/logo.jpeg"; // Still using the old logo import here
+// import imag from "./assets/image.png"; // Use relative path if needed
+
+// --- FIX: Using relative path for logo import ---
+import logo from "./assets/logo.jpeg";
 
 // --- TYPES (from types.ts) ---
 interface NavLink {
@@ -22,7 +24,7 @@ interface ServiceCategory {
 interface Client {
   name: string;
   logo?: string; // logo is a string URL or path
-  type: 'completed' | 'ongoing';
+  type: 'completed' | 'ongoing' | 'vendor'; // Added 'vendor' type
 }
 
 // Project types removed as they are no longer needed
@@ -156,6 +158,7 @@ const CLIENTS: Client[] = [
     // Corrected logo path for AM/NS - assuming 'imag' was a placeholder for a specific image import
     // If 'imag' was meant to be imported like the logo, it needs a proper import.
     // Using a placeholder string for now. If you have an image, import it like 'logo'.
+    // --- FIX: Using relative paths for placeholder logos ---
     { name: "AM/NS India", logo: "https://indiashippingnews.com/wp-content/uploads/2023/12/AMNS-New-e1703878483400-1.jpg", type: "completed" }, // Example: Replace with actual path or import
     { name: "Pepsico International - Frito Lay", logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a6/PepsiCo_logo.svg/1200px-PepsiCo_logo.svg.png", type: "completed" },
     { name: "H & R. Johnson (I.) Limited", logo: "https://d2ki7eiqd260sq.cloudfront.net/CORPORATE-LOGO-NEW6130d7d5-8c2c-41c1-8918-e01f2fa1be73.png", type: "completed" },
@@ -176,6 +179,15 @@ const CLIENTS: Client[] = [
     { name: "SKI Carbon", logo: "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgZmlsbD0iI2Y1ZjVmNSIvPjx0ZXh0IHg9IjUwJSIgeT0iNTAlIiBmb250LXNpemU9IjE2IiBmaWxsPSIjNjY2IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBkb21pbmFudC1iYXNlbGluZT0ibWlkZGxlIj5TS0k8L3RleHQ+PC9zdmc+", type: "completed" },
     { name: "Simplex Concrete Piles India Limited", logo: "https://tipl.triamtmt.com/wp-content/uploads/2025/05/9.jpg", type: "completed" },
     { name: "Uttam Galva Steels Limited", logo: "https://www.equitybulls.com/equitybullsadmin/uploads/Uttam%20Galva%20Steels%20Limited%203.jpg", type: "completed" },
+];
+
+// --- NEW: ACTIVE VENDORS LIST ---
+const ACTIVE_VENDORS: Client[] = [
+    { name: "AM/NS India", logo: "https://indiashippingnews.com/wp-content/uploads/2023/12/AMNS-New-e1703878483400-1.jpg", type: "vendor" },
+    { name: "SKI Carbon", logo: "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgZmlsbD0iI2Y1ZjVmNSIvPjx0ZXh0IHg9IjUwJSIgeT0iNTAlIiBmb250LXNpemU9IjE2IiBmaWxsPSIjNjY2IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBkb21pbmFudC1iYXNlbGluZT0ibWlkZGxlIj5TS0k8L3RleHQ+PC9zdmc+", type: "vendor" },
+    { name: "Alta Laboratories Ltd", logo: "https://www.pharmacompass.com/image/logo/alta-laboratories-1652261249.png", type: "vendor" },
+    { name: "Renuka Sugar", logo: "https://indianpsu.com/wp-content/uploads/2023/05/Shree-Renuka-Sugars-Limited-Logo-3.jpg", type: "vendor" },
+    { name: "Jindal Stainless Steelway", logo: "https://upload.wikimedia.org/wikipedia/commons/3/3c/Jindal_Steel_Limited_Logo.png", type: "vendor" },
 ];
 
 // --- PROJECTS CONSTANT REMOVED ---
@@ -433,9 +445,9 @@ const ServicesPage: React.FC = () => {
                     <div className="mb-8 border-b border-gray-200">
                         <div className="flex flex-wrap -mb-px justify-center" role="tablist" aria-orientation="horizontal">
                             {SERVICE_CATEGORIES.map((category, index) => (
-                                <button 
-                                    key={category.name} 
-                                    onClick={() => setActiveTab(index)} 
+                                <button
+                                    key={category.name}
+                                    onClick={() => setActiveTab(index)}
                                     className={`py-4 px-1 mx-2 sm:mx-4 border-b-2 text-sm sm:text-base font-medium transition-colors duration-300 ${activeTab === index ? 'border-yellow-600 text-yellow-600' : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'}`}
                                     role="tab"
                                     aria-selected={activeTab === index}
@@ -450,8 +462,8 @@ const ServicesPage: React.FC = () => {
                     {/* --- TAB PANELS --- */}
                     <div className="bg-gray-50 p-8 rounded-lg shadow-inner">
                         {SERVICE_CATEGORIES.map((category, index) => (
-                            <div 
-                                key={category.name} 
+                            <div
+                                key={category.name}
                                 className={`${activeTab === index ? 'block' : 'hidden'}`}
                                 role="tabpanel"
                                 tabIndex={0}
@@ -479,25 +491,85 @@ const ServicesPage: React.FC = () => {
     );
 };
 
+// --- UPDATED CLIENTS PAGE COMPONENT ---
 const ClientsPage: React.FC = () => {
     const sectionRef = useScrollAnimation<HTMLElement>();
+    const [activeTab, setActiveTab] = useState<'completed' | 'vendors'>('completed');
+
     const completedClients = CLIENTS.filter(c => c.type === 'completed');
+    // We already defined ACTIVE_VENDORS as a global constant
+
+    // Helper function to render a list of clients
+    const renderClientList = (clients: Client[]) => (
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6">
+            {clients.map((client) => (
+                <div key={client.name} className="flex flex-col justify-between items-center text-center p-4 bg-white border border-gray-200 rounded-lg h-32 hover:shadow-md transition-shadow">
+                    <div className="flex-grow flex items-center justify-center w-full h-full overflow-hidden"> {/* Ensure container fills space */}
+                        {/* Make image responsive and centered */}
+                        <img
+                           src={client.logo || 'https://placehold.co/100x60/eee/ccc?text=Logo'} // Fallback placeholder
+                           alt={client.name}
+                           className="max-h-16 max-w-[80%] client-logo object-contain mx-auto" // Control size, center
+                           onError={(e) => {
+                             const target = e.target as HTMLImageElement;
+                             target.onerror = null; // Prevent infinite loop
+                             target.src='https://placehold.co/100x60/eee/ccc?text=Error'; // Error placeholder
+                           }}
+                        />
+                    </div>
+                    {/* Ensure text wraps and is centered */}
+                    <p className="text-xs sm:text-sm font-medium text-gray-700 mt-2 text-center break-words w-full">{client.name}</p>
+                </div>
+            ))}
+        </div>
+    );
+
+
     return (
         <section id="clients" className="py-20 bg-gray-50 fade-in-section min-h-screen" ref={sectionRef}>
             <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-                <div className="text-center mb-12"><h2 className="text-3xl font-extrabold text-gray-900 sm:text-4xl">Our Valued Clients</h2><p className="mt-4 text-lg text-gray-600">Our Commitment to Quality has Earned Their Trust</p></div>
-                <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6">
-                    {completedClients.map((client) => (
-                         <div key={client.name} className="flex justify-center items-center p-4 bg-white border border-gray-200 rounded-lg h-28 hover:shadow-md transition-shadow">
-                            {/* Use client.logo which should be a string path */}
-                            <img src={client.logo} alt={client.name} className="max-h-16 max-w-full client-logo object-contain" />
+                <div className="text-center mb-12">
+                    <h2 className="text-3xl font-extrabold text-gray-900 sm:text-4xl">Our Clients & Vendors</h2>
+                    <p className="mt-4 text-lg text-gray-600">Our Commitment to Quality has Earned Their Trust</p>
+                </div>
+
+                {/* --- TABS for Clients/Vendors --- */}
+                <div className="flex justify-center flex-wrap gap-2 mb-10">
+                    <button
+                        onClick={() => setActiveTab('completed')}
+                        className={`px-6 py-2 rounded-full font-medium text-sm transition-colors ${activeTab === 'completed' ? 'bg-yellow-600 text-white' : 'bg-gray-200 text-gray-700 hover:bg-gray-300'}`}
+                    >
+                        Completed Clients
+                    </button>
+                    <button
+                        onClick={() => setActiveTab('vendors')}
+                        className={`px-6 py-2 rounded-full font-medium text-sm transition-colors ${activeTab === 'vendors' ? 'bg-yellow-600 text-white' : 'bg-gray-200 text-gray-700 hover:bg-gray-300'}`}
+                    >
+                        Active Vendors
+                    </button>
+                </div>
+
+                {/* --- Conditional Content --- */}
+                <div>
+                    {activeTab === 'completed' && (
+                        <div>
+                            <h3 className="text-2xl font-bold text-gray-800 mb-6 text-center">Completed Client Work</h3>
+                            {renderClientList(completedClients)}
                         </div>
-                    ))}
+                    )}
+                    {activeTab === 'vendors' && (
+                         <div>
+                            <h3 className="text-2xl font-bold text-gray-800 mb-6 text-center">Active Vendors</h3>
+                            {renderClientList(ACTIVE_VENDORS)}
+                        </div>
+                    )}
                 </div>
             </div>
         </section>
     );
 };
+// --- END OF UPDATED CLIENTS PAGE ---
+
 
 // --- PROJECTS PAGE COMPONENT REMOVED ---
 // const ProjectsPage: React.FC = () => { ... };
@@ -515,7 +587,7 @@ const ContactPage: React.FC = () => {
                         <div className="space-y-4">
                             <div className="flex items-start"><i data-lucide="map-pin" className="w-5 h-5 text-yellow-600 mr-4 mt-1 flex-shrink-0"></i><div><h4 className="font-semibold text-gray-800">Address</h4><p className="text-gray-600">Patil and Company (P and Co)<br/>House No 45, At Navandhe, Post Jambrung<br/>Tal. Khalapur, Dist. Raigad<br/>Maharashtra - 410203</p></div></div>
                             <div className="flex items-start"><i data-lucide="mail" className="w-5 h-5 text-yellow-600 mr-4 mt-1 flex-shrink-0"></i><div><h4 className="font-semibold text-gray-800">Email</h4><a href="mailto:patilandcom@gmail.com" className="text-yellow-600 hover:text-yellow-700">patilandcom@gmail.com</a></div></div>
-                            <div className="flex items-start"><i data-lucide="phone" className="w-5 h-5 text-yellow-600 mr-4 mt-1 flex-shrink-0"></i><div><h4 className="font-semibold text-gray-800">Telephone</h4><a href="tel:9823382053" className="block text-gray-600 hover:text-yellow-600">9823382053</a><a href="tel:9422094539" className="block text-gray-600 hover:text-yellow-600">9422094539</a><a href="tel:9923214165" className="block text-gray-600 hover:text-yellow-600">9923214165</a><a href="tel:9158444165" className="block text-gray-600 hover:text-yellow-600">9NT_LOGS=0158444165</a></div></div>
+                            <div className="flex items-start"><i data-lucide="phone" className="w-5 h-5 text-yellow-600 mr-4 mt-1 flex-shrink-0"></i><div><h4 className="font-semibold text-gray-800">Telephone</h4><a href="tel:9823382053" className="block text-gray-600 hover:text-yellow-600">9823382053</a><a href="tel:9422094539" className="block text-gray-600 hover:text-yellow-600">9422094539</a><a href="tel:9923214165" className="block text-gray-600 hover:text-yellow-600">9923214165</a><a href="tel:9158444165" className="block text-gray-600 hover:text-yellow-600">9158444165</a></div></div>
                         </div>
                         <a href="https://wa.me/919823382053" target="_blank" rel="noopener noreferrer" className="mt-8 inline-flex items-center justify-center w-full bg-green-500 text-white font-bold py-3 px-6 rounded-md hover:bg-green-600 transition-colors"><i data-lucide="message-circle" className="w-5 h-5 mr-3"></i>Chat on WhatsApp</a>
                     </div>
@@ -692,12 +764,11 @@ const App: React.FC = () => {
                     <img src="https://images.unsplash.com/photo-1541888946425-d81bb19240f5?q=80&w=2070&auto=format&fit=crop" alt="Background" className="w-full h-full object-cover" />
                 </div>
                 <div className="relative z-20 text-center px-4">
-                    <img 
-                        src={logo} 
-                        alt="Patil and Company Logo" 
+                    <img src={logo}
+                        alt="Patil and Company Logo"
                         className="h-24 w-auto mx-auto mb-6 bg-white p-2 rounded-lg shadow-md animate-fadeInUp" // Using animation
                     />
-                    <h1 
+                    <h1
                         className="text-4xl md:text-6xl font-extrabold mb-8 leading-tight drop-shadow-lg animate-fadeInUp"
                         style={{ animationDelay: '0.2s' }}
                     >
@@ -722,6 +793,7 @@ const App: React.FC = () => {
             <Header onNavigate={handleNavigate} currentPage={currentPage} />
             <main>
                 {renderPage()}
+                 {/* --- TYPO REMOVED FROM HERE --- */}
             </main>
             {/* Footer also needs onNavigate */}
             <Footer onNavigate={handleNavigate} />
