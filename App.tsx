@@ -25,15 +25,9 @@ interface Client {
   type: 'completed' | 'ongoing';
 }
 
-type ProjectCategory = 'Industrial' | 'Commercial' | 'Residential';
-
-interface Project {
-  id: number;
-  title: string;
-  description: string;
-  category: ProjectCategory;
-  imageUrl: string; // imageUrl is a string URL or path
-}
+// Project types removed as they are no longer needed
+// type ProjectCategory = 'Industrial' | 'Commercial' | 'Residential';
+// interface Project { ... }
 
 // --- CONSTANTS (from constants.ts) ---
 // Using page paths for hash routing
@@ -158,7 +152,6 @@ const SERVICE_CATEGORIES: ServiceCategory[] = [
 ];
 // --- END OF UPDATED SERVICES ---
 
-
 const CLIENTS: Client[] = [
     // Corrected logo path for AM/NS - assuming 'imag' was a placeholder for a specific image import
     // If 'imag' was meant to be imported like the logo, it needs a proper import.
@@ -185,15 +178,8 @@ const CLIENTS: Client[] = [
     { name: "Uttam Galva Steels Limited", logo: "https://www.equitybulls.com/equitybullsadmin/uploads/Uttam%20Galva%20Steels%20Limited%203.jpg", type: "completed" },
 ];
 
-const PROJECTS: Project[] = [
-    // Corrected imageUrl path for AM/NS - assuming 'imag' was a placeholder
-    { id: 1, title: "AM/NS Steel Plant Expansion", description: "Ongoing structural and repair work for a major steel manufacturing facility.", category: "Industrial", imageUrl: "@/assets/amns-project.png" }, // Example: Replace with actual path or import
-    { id: 2, title: "Corporate Office Renovation", description: "Complete interior and exterior overhaul for a commercial office building.", category: "Commercial", imageUrl: "https://images.unsplash.com/photo-1497366216548-37526070297c?w=800&auto=format&fit=crop&q=80", },
-    { id: 3, title: "Luxury Residential Villa", description: "Ground-up construction of a high-end residential property with custom landscaping.", category: "Residential", imageUrl: "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=800&auto=format&fit=crop&q=80", },
-    { id: 4, title: "Industrial Warehouse Flooring", description: "Installation of heavy-duty epoxy flooring for a high-traffic logistics center.", category: "Industrial", imageUrl: "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=800&auto=format&fit=crop&q=80", },
-    { id: 5, title: "Retail Space Build-Out", description: "Custom interior fit-out for a new retail storefront in a shopping complex.", category: "Commercial", imageUrl: "https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=800&auto=format&fit=crop&q=80", },
-    { id: 6, title: "High-Rise Facade Painting", description: "Specialized painting and waterproofing services for a multi-story residential tower.", category: "Residential", imageUrl: "https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=800&auto=format&fit=crop&q=80", },
-];
+// --- PROJECTS CONSTANT REMOVED ---
+// const PROJECTS: Project[] = [ ... ];
 
 
 // --- HOOKS (from hooks/useScrollAnimation.ts) ---
@@ -298,20 +284,19 @@ const Header: React.FC<{ onNavigate: (page: string) => void, currentPage: string
     );
 };
 
-// --- UPDATED FOOTER COMPONENT (MINIMALISTIC) ---
+// --- MODIFIED FOOTER COMPONENT (MINIMALISTIC) ---
 const Footer: React.FC<{ onNavigate: (page: string) => void }> = ({ onNavigate }) => {
     const handleLinkClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
         e.preventDefault();
         onNavigate(href);
     };
 
-    // Add "Contact" to the footer links
-    // NOTE: This includes Projects and Policies from the original NAV_LINKS before modification
+    // --- PROJECTS LINK REMOVED FROM FOOTER ---
     const originalNavLinksPlusContact = [
         { name: "Home", href: "/" },
         { name: "Services", href: "/services" },
         { name: "Clients", href: "/clients" },
-        { name: "Projects", href: "/projects" }, // Keep in footer
+        // { name: "Projects", href: "/projects" }, // Removed
         { name: "Policies", href: "/policies" }, // Keep in footer
         { name: "Contact", href: "/contact" }
     ];
@@ -338,7 +323,7 @@ const Footer: React.FC<{ onNavigate: (page: string) => void }> = ({ onNavigate }
                     {/* Right Side: Horizontal Quick Links */}
                     <nav>
                         <ul className="flex flex-wrap justify-center sm:justify-end items-center space-x-4 sm:space-x-6">
-                            {/* Use the extended list including Projects/Policies for the footer */}
+                            {/* Use the modified list with "Projects" removed */}
                             {originalNavLinksPlusContact.map(link => (
                                 <li key={link.name}>
                                     <a
@@ -491,38 +476,8 @@ const ClientsPage: React.FC = () => {
     );
 };
 
-const ProjectsPage: React.FC = () => {
-    const [filter, setFilter] = useState<ProjectCategory | 'All'>('All');
-    const [filteredProjects, setFilteredProjects] = useState<Project[]>(PROJECTS);
-    const sectionRef = useScrollAnimation<HTMLElement>();
-    const allCategories: (ProjectCategory | 'All')[] = ['All', 'Industrial', 'Commercial', 'Residential'];
-
-    useEffect(() => {
-        setFilteredProjects(filter === 'All' ? PROJECTS : PROJECTS.filter(p => p.category === filter));
-    }, [filter]);
-
-    return (
-        <section id="projects" className="py-20 bg-white fade-in-section min-h-screen" ref={sectionRef}>
-            <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-                <div className="text-center mb-12"><h2 className="text-3xl font-extrabold text-gray-900 sm:text-4xl">Our Projects</h2><p className="mt-4 text-lg text-gray-600">A Glimpse into Our Portfolio of Excellence</p></div>
-                <div className="flex justify-center flex-wrap gap-2 mb-10">
-                    {allCategories.map(category => (<button key={category} onClick={() => setFilter(category)} className={`px-6 py-2 rounded-full font-medium text-sm transition-colors ${filter === category ? 'bg-yellow-600 text-white' : 'bg-gray-200 text-gray-700 hover:bg-gray-300'}`}>{category}</button>))}
-                </div>
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                    {filteredProjects.map((project) => (
-                        <div key={project.id} className="bg-white rounded-lg shadow-lg overflow-hidden group border border-gray-200">
-                            <div className="relative overflow-hidden h-56">
-                                {/* Use project.imageUrl which should be a string path */}
-                                <img src={project.imageUrl} alt={project.title} className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-300" />
-                             </div>
-                            <div className="p-6"><span className="inline-block bg-yellow-100 text-yellow-800 text-xs font-semibold px-2.5 py-0.5 rounded-full mb-2">{project.category}</span><h3 className="text-xl font-semibold text-gray-900 mb-2">{project.title}</h3><p className="text-gray-600 text-sm">{project.description}</p></div>
-                        </div>
-                    ))}
-                </div>
-            </div>
-        </section>
-    );
-};
+// --- PROJECTS PAGE COMPONENT REMOVED ---
+// const ProjectsPage: React.FC = () => { ... };
 
 const ContactPage: React.FC = () => {
     const sectionRef = useScrollAnimation<HTMLElement>();
@@ -673,8 +628,9 @@ const App: React.FC = () => {
             // --- FIX 2: Added /about case ---
             case '/about': // Add this case
                 return <About />; // Render the About component
-            case '/projects':
-                return <ProjectsPage />;
+            // --- PROJECTS CASE REMOVED ---
+            // case '/projects':
+            //     return <ProjectsPage />;
             case '/contact':
                 return <ContactPage />;
             case '/policies':
