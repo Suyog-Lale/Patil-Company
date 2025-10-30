@@ -46,29 +46,35 @@ const NAV_LINKS: NavLink[] = [
   // { name: "Policies", href: "/policies" }, // Removed
 ];
 
+// --- UPDATED: FULL 13 SERVICE CATEGORIES ---
 const SERVICE_CATEGORIES: ServiceCategory[] = [
     {
-        name: "Core & Structural",
+        name: "Core Construction",
         services: [
             { name: "Site Preparation", description: "Land clearing, grading, excavation, and earthwork." },
             { name: "Foundation Work", description: "Footings, concrete foundations, piling, basement construction." },
             { name: "Structural Work", description: "Framing (wood, steel, concrete), reinforced concrete structures." },
-            { name: "Roofing", description: "Installation of flat/sloped roofs, roof repairs, waterproofing." }
+            { name: "Roofing Services", description: "Installation of flat/sloped roofs, roof repairs, waterproofing." }
         ],
     },
     {
-        name: "Interior & Exterior",
+        name: "Interior Construction",
         services: [
             { name: "Interior Partitions", description: "Drywall installation, glass partitioning." },
-            { name: "Flooring", description: "Tile, carpet, hardwood, laminate flooring." },
-            { name: "Ceilings", description: "False ceilings (POP, gypsum), suspended ceilings (acoustic tiles)." },
-            { name: "Painting", description: "Interior wall painting, staining, varnishing woodwork." },
-            { name: "Carpentry", description: "Custom cabinetry, modular kitchens, furniture design." },
-            { name: "Aluminum Doors/Windows", description: "Fabrication and installation of durable aluminum frames for doors and windows." },
-            { name: "ACP Cladding", description: "Exterior cladding for buildings to enhance aesthetics and durability." },
-            { name: "Glass Facades", description: "Installation of glass panels for modern building exteriors." },
-            { name: "Steel Fabrication", description: "MS (Mild Steel) and SS (Stainless Steel) fabrication work including grills, railings, and trolleys." },
-            { name: "Sign Boards", description: "Design, fabrication, and installation of advertising boards." },
+            { name: "Flooring Installation", description: "Tile, carpet, hardwood, laminate flooring." },
+            { name: "Ceiling Work", description: "False ceilings (POP, gypsum), suspended ceilings (acoustic tiles)." },
+            { name: "Painting and Finishing", description: "Interior wall painting, staining, varnishing woodwork." },
+            { name: "Carpentry and Furniture Work", description: "Custom cabinetry, modular kitchens, furniture design." },
+        ],
+    },
+    {
+        name: "Exterior Construction",
+        services: [
+            { name: "Aluminum Doors and Windows", description: "Fabrication and installation of durable aluminum frames for doors and windows." },
+            { name: "ACP Cladding (Aluminum Composite Panel)", description: "Exterior cladding for buildings to enhance aesthetics and durability." },
+            { name: "Glass Glazing and Facade Work", description: "Installation of glass panels for modern building exteriors." },
+            { name: "Steel Fabrication", description: "MS (Mild Steel) and SS (Stainless Steel) fabrication work including grills, railings, trolleys, and structural elements." },
+            { name: "Sign Boards and Billboards", description: "Design, fabrication, and installation of advertising boards." },
         ],
     },
     {
@@ -76,49 +82,82 @@ const SERVICE_CATEGORIES: ServiceCategory[] = [
         services: [
             { name: "Epoxy Flooring", description: "High-performance flooring for industrial environments." },
             { name: "Polyurethane (PU) Flooring", description: "Resistant to organic acids; ideal for food industries." },
-            { name: "Heavy-Duty Flooring", description: "Robust surfaces for warehouses and manufacturing plants." },
-            { name: "Floor Repair", description: "Specialized solutions for repairing damaged industrial floors." },
-            { name: "Anti-static/ESD Flooring", description: "Designed for electronics industries to prevent static discharge." },
+            { name: "Heavy-Duty Industrial Flooring", description: "Robust surfaces for warehouses and manufacturing plants." },
+            { name: "Proprietary Floor Repair", description: "Specialized solutions for repairing damaged industrial floors." },
+            { name: "Anti-static and ESD Flooring", description: "Designed for electronics industries to prevent static discharge." },
             { name: "Anti-skid Flooring", description: "Safety-focused flooring to prevent slips in industrial settings." },
         ],
     },
     {
-        name: "Specialized Services",
+        name: "Specialized Construction",
         services: [
-            { name: "Pressure Grouting", description: "Injection of grout material into voids or cracks in concrete structures." },
-            { name: "Sand Blasting", description: "Surface preparation technique for cleaning or finishing surfaces." },
-            { name: "High-Rise Painting", description: "Expertise in painting tall chimneys and building facades with safety protocols." },
-            { name: "Demolition", description: "Selective or complete building demolition using heavy machinery." },
+            { name: "Pressure Grouting", description: "Injection of grout material into voids or cracks in concrete structures to stabilize foundations and prevent leakage." },
+            { name: "Sand Blasting", description: "Surface preparation technique used for cleaning or finishing surfaces before painting or coating." },
         ],
     },
     {
-        name: "Management & MEP",
+        name: "High-Rise Painting",
         services: [
-            { name: "Farm/Nursery/Orchard Management", description: "Comprehensive management for agricultural, nursery, and orchard operations." },
-            { name: "Mechanical/Electrical/Plumbing (MEP)", description: "Installation of electrical, plumbing, and HVAC systems." },
+            { name: "Chimney Painting (Over 100 Meters)", description: "Expertise in painting tall chimneys with safety protocols and specialized equipment." },
+            { name: "Facade Painting for High-Rise Buildings", description: "Maintenance of building exteriors at great heights to protect against weather elements." },
         ],
     },
     {
-        name: "Renovation & Landscaping",
+        name: "Management Services",
+        services: [
+            { name: "Farm Management", description: "Comprehensive management services for agricultural operations." },
+            { name: "Nursery Management", description: "Care and cultivation of plants in a nursery setting." },
+            { name: "Orchard Management", description: "Expertise in the cultivation and maintenance of fruit-bearing trees." },
+        ],
+    },
+    {
+        name: "MEP Services",
+        services: [
+            { name: "Electrical Systems Installation", description: "Wiring, lighting fixtures, and complete electrical systems." },
+            { name: "Plumbing Systems Installation", description: "Installation of pipes, fixtures, and plumbing systems." },
+            { name: "HVAC Systems Installation", description: "Heating, Ventilation, and Air Conditioning systems." },
+        ],
+    },
+    {
+        name: "Demolition Services",
+        services: [
+            { name: "Selective Demolition", description: "Interior walls or non-load-bearing structures." },
+            { name: "Complete Building Demolition", description: "Demolition using heavy machinery." },
+        ],
+    },
+    {
+        name: "Renovation & Remodeling",
         services: [
             { name: "Residential Renovations", description: "Complete renovation services for kitchens, bathrooms, and entire homes." },
-            { name: "Commercial Renovations", description: "Remodeling services for office interiors and commercial spaces." },
-            { name: "Landscaping", description: "Garden design, maintenance, and hardscaping (patios, walkways)." },
-            { name: "Paving", description: "Installation of paving for patios, walkways, and driveways." },
-            { name: "Outdoor Lighting", description: "Installation of lighting for outdoor spaces to enhance aesthetics and security." },
+            { name: "Commercial Space Remodeling", description: "Remodeling services for office interiors and commercial spaces." },
         ],
     },
     {
-        name: "Additional & Project Management",
+        name: "Landscaping & Outdoor",
         services: [
-            { name: "Waterproofing", description: "Solutions for basements, roofs, and other structures to prevent water damage." },
-            { name: "Energy Upgrades", description: "Services to improve energy efficiency, such as thermal insulation." },
-            { name: "Soundproofing", description: "Installation of materials to reduce noise transmission in residential or commercial spaces." },
+            { name: "Garden Landscaping", description: "Garden design, maintenance, and hardscaping (patios, walkways)." },
+            { name: "Paving/Hardscaping", description: "Installation of paving for patios, walkways, and driveways." },
+            { name: "Outdoor Lighting Installation", description: "Installation of lighting for outdoor spaces to enhance aesthetics and security." },
+        ],
+    },
+    {
+        name: "Additional Services",
+        services: [
+            { name: "Waterproofing Solutions", description: "Solutions for basements, roofs, and other structures to prevent water damage." },
+            { name: "Energy Efficiency Upgrades", description: "Services to improve energy efficiency, such as thermal insulation." },
+            { name: "Soundproofing Services", description: "Installation of materials to reduce noise in residential or commercial spaces." },
+        ],
+    },
+    {
+        name: "Project Management",
+        services: [
             { name: "Construction Management", description: "Overseeing project timelines, budgets, and quality control from start to finish." },
-            { name: "Consulting", description: "Providing expert advice, feasibility studies, and risk assessments for construction projects." },
+            { name: "Consulting Services", description: "Providing expert advice, feasibility studies, and risk assessments for projects." },
         ],
     },
 ];
+// --- END OF UPDATED SERVICES ---
+
 
 const CLIENTS: Client[] = [
     // Corrected logo path for AM/NS - assuming 'imag' was a placeholder for a specific image import
