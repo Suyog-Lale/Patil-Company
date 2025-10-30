@@ -156,7 +156,7 @@ const CLIENTS: Client[] = [
     // Corrected logo path for AM/NS - assuming 'imag' was a placeholder for a specific image import
     // If 'imag' was meant to be imported like the logo, it needs a proper import.
     // Using a placeholder string for now. If you have an image, import it like 'logo'.
-    { name: "AM/NS India", logo: "@/assets/amns-logo.png", type: "completed" }, // Example: Replace with actual path or import
+    { name: "AM/NS India", logo: "https://indiashippingnews.com/wp-content/uploads/2023/12/AMNS-New-e1703878483400-1.jpg", type: "completed" }, // Example: Replace with actual path or import
     { name: "Pepsico International - Frito Lay", logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a6/PepsiCo_logo.svg/1200px-PepsiCo_logo.svg.png", type: "completed" },
     { name: "H & R. Johnson (I.) Limited", logo: "https://d2ki7eiqd260sq.cloudfront.net/CORPORATE-LOGO-NEW6130d7d5-8c2c-41c1-8918-e01f2fa1be73.png", type: "completed" },
     { name: "Grindwell - Nortan", logo: "https://companieslogo.com/img/orig/GRINDWELL.NS-155a919c.png?t=1720244492", type: "completed" },
@@ -429,12 +429,35 @@ const ServicesPage: React.FC = () => {
             <div className="container mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="text-center mb-12"><h2 className="text-3xl font-extrabold text-gray-900 sm:text-4xl">Our Services</h2><p className="mt-4 text-lg text-gray-600">Comprehensive Solutions for Every Need</p></div>
                 <div className="flex flex-col">
-                    <div className="mb-8 border-b border-gray-200"><div className="flex flex-wrap -mb-px justify-center">
-                        {SERVICE_CATEGORIES.map((category, index) => (<button key={category.name} onClick={() => setActiveTab(index)} className={`py-4 px-1 mx-2 sm:mx-4 border-b-2 text-sm sm:text-base font-medium transition-colors duration-300 ${activeTab === index ? 'border-yellow-600 text-yellow-600' : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'}`}>{category.name}</button>))}
-                    </div></div>
+                    {/* --- TABS FOR SERVICES --- */}
+                    <div className="mb-8 border-b border-gray-200">
+                        <div className="flex flex-wrap -mb-px justify-center" role="tablist" aria-orientation="horizontal">
+                            {SERVICE_CATEGORIES.map((category, index) => (
+                                <button 
+                                    key={category.name} 
+                                    onClick={() => setActiveTab(index)} 
+                                    className={`py-4 px-1 mx-2 sm:mx-4 border-b-2 text-sm sm:text-base font-medium transition-colors duration-300 ${activeTab === index ? 'border-yellow-600 text-yellow-600' : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'}`}
+                                    role="tab"
+                                    aria-selected={activeTab === index}
+                                    aria-controls={`tab-panel-${index}`}
+                                    id={`tab-${index}`}
+                                >
+                                    {category.name}
+                                </button>
+                            ))}
+                        </div>
+                    </div>
+                    {/* --- TAB PANELS --- */}
                     <div className="bg-gray-50 p-8 rounded-lg shadow-inner">
                         {SERVICE_CATEGORIES.map((category, index) => (
-                            <div key={category.name} className={`${activeTab === index ? 'block' : 'hidden'}`}>
+                            <div 
+                                key={category.name} 
+                                className={`${activeTab === index ? 'block' : 'hidden'}`}
+                                role="tabpanel"
+                                tabIndex={0}
+                                id={`tab-panel-${index}`}
+                                aria-labelledby={`tab-${index}`}
+                            >
                                 <h3 className="text-2xl font-bold text-gray-800 mb-6 text-center">{category.name}</h3>
                                 <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-x-8 gap-y-6">
                                     {category.services.map(service => (
@@ -492,7 +515,7 @@ const ContactPage: React.FC = () => {
                         <div className="space-y-4">
                             <div className="flex items-start"><i data-lucide="map-pin" className="w-5 h-5 text-yellow-600 mr-4 mt-1 flex-shrink-0"></i><div><h4 className="font-semibold text-gray-800">Address</h4><p className="text-gray-600">Patil and Company (P and Co)<br/>House No 45, At Navandhe, Post Jambrung<br/>Tal. Khalapur, Dist. Raigad<br/>Maharashtra - 410203</p></div></div>
                             <div className="flex items-start"><i data-lucide="mail" className="w-5 h-5 text-yellow-600 mr-4 mt-1 flex-shrink-0"></i><div><h4 className="font-semibold text-gray-800">Email</h4><a href="mailto:patilandcom@gmail.com" className="text-yellow-600 hover:text-yellow-700">patilandcom@gmail.com</a></div></div>
-                            <div className="flex items-start"><i data-lucide="phone" className="w-5 h-5 text-yellow-600 mr-4 mt-1 flex-shrink-0"></i><div><h4 className="font-semibold text-gray-800">Telephone</h4><a href="tel:9823382053" className="block text-gray-600 hover:text-yellow-600">9823382053</a><a href="tel:9422094539" className="block text-gray-600 hover:text-yellow-600">9422094539</a><a href="tel:9923214165" className="block text-gray-600 hover:text-yellow-600">9923214165</a><a href="tel:9158444165" className="block text-gray-600 hover:text-yellow-600">9158444165</a></div></div>
+                            <div className="flex items-start"><i data-lucide="phone" className="w-5 h-5 text-yellow-600 mr-4 mt-1 flex-shrink-0"></i><div><h4 className="font-semibold text-gray-800">Telephone</h4><a href="tel:9823382053" className="block text-gray-600 hover:text-yellow-600">9823382053</a><a href="tel:9422094539" className="block text-gray-600 hover:text-yellow-600">9422094539</a><a href="tel:9923214165" className="block text-gray-600 hover:text-yellow-600">9923214165</a><a href="tel:9158444165" className="block text-gray-600 hover:text-yellow-600">9NT_LOGS=0158444165</a></div></div>
                         </div>
                         <a href="https://wa.me/919823382053" target="_blank" rel="noopener noreferrer" className="mt-8 inline-flex items-center justify-center w-full bg-green-500 text-white font-bold py-3 px-6 rounded-md hover:bg-green-600 transition-colors"><i data-lucide="message-circle" className="w-5 h-5 mr-3"></i>Chat on WhatsApp</a>
                     </div>
@@ -588,13 +611,16 @@ const App: React.FC = () => {
 
     const [currentPage, setCurrentPage] = useState(getInitialPage());
 
+    // --- NEW: STATE FOR SPLASH SCREEN ---
+    const [isSiteEntered, setIsSiteEntered] = useState(false);
+
     // Effect to run createIcons on initial load and page changes
     useEffect(() => {
         if (window.lucide) {
             window.lucide.createIcons();
         }
         // Dependency array includes currentPage to re-run when the page changes
-    }, [currentPage]);
+    }, [currentPage, isSiteEntered]); // Re-run when site is entered as well
 
     // Handle hash changes for back/forward navigation
     useEffect(() => {
@@ -613,6 +639,13 @@ const App: React.FC = () => {
         window.location.hash = targetHash;
         // The state will be updated automatically by the 'hashchange' event listener
         window.scrollTo(0, 0); // Scroll to top after navigation
+    };
+
+    // --- NEW: Function to handle entering the site ---
+    const handleEnter = () => {
+        setIsSiteEntered(true);
+        // Navigate to the initial page (which might be from a hash)
+        handleNavigate(getInitialPage());
     };
 
     const renderPage = () => {
@@ -648,6 +681,41 @@ const App: React.FC = () => {
         }
     };
 
+    // --- NEW: Conditional Rendering for Splash Screen ---
+    if (!isSiteEntered) {
+        return (
+            // Splash Screen Component
+            <section className="relative h-screen flex items-center justify-center text-white bg-black">
+                <div className="absolute inset-0 bg-black opacity-60 z-10"></div>
+                <div className="absolute inset-0 overflow-hidden">
+                    {/* Re-using the hero background image */}
+                    <img src="https://images.unsplash.com/photo-1541888946425-d81bb19240f5?q=80&w=2070&auto=format&fit=crop" alt="Background" className="w-full h-full object-cover" />
+                </div>
+                <div className="relative z-20 text-center px-4">
+                    <img 
+                        src={logo} 
+                        alt="Patil and Company Logo" 
+                        className="h-24 w-auto mx-auto mb-6 bg-white p-2 rounded-lg shadow-md animate-fadeInUp" // Using animation
+                    />
+                    <h1 
+                        className="text-4xl md:text-6xl font-extrabold mb-8 leading-tight drop-shadow-lg animate-fadeInUp"
+                        style={{ animationDelay: '0.2s' }}
+                    >
+                        Patil and Company
+                    </h1>
+                    <button
+                        onClick={handleEnter}
+                        className="inline-block bg-yellow-600 text-white px-10 py-3 rounded-md text-lg font-semibold hover:bg-yellow-700 transition-colors shadow-md animate-fadeInUp"
+                        style={{ animationDelay: '0.4s' }}
+                    >
+                        Click to Enter
+                    </button>
+                </div>
+            </section>
+        );
+    }
+
+    // --- Original return for the main site ---
     return (
         <div className="bg-white">
             {/* Pass currentPage to Header for highlighting */}
