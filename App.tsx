@@ -159,7 +159,7 @@ const CLIENTS: Client[] = [
     // If 'imag' was meant to be imported like the logo, it needs a proper import.
     // Using a placeholder string for now. If you have an image, import it like 'logo'.
     // --- FIX: Using relative paths for placeholder logos ---
-    { name: "AM/NS India", logo: "https://indiashippingnews.com/wp-content/uploads/2023/12/AMNS-New-e1703878483400-1.jpg", type: "completed" }, // Example: Replace with actual path or import
+    { name: "AM/NS India", logo: "https://travel.amns.in/static/media/amns_transparent.bf237bba696c0751e0b1.png", type: "completed" }, // Example: Replace with actual path or import
     { name: "Pepsico International - Frito Lay", logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a6/PepsiCo_logo.svg/1200px-PepsiCo_logo.svg.png", type: "completed" },
     { name: "H & R. Johnson (I.) Limited", logo: "https://d2ki7eiqd260sq.cloudfront.net/CORPORATE-LOGO-NEW6130d7d5-8c2c-41c1-8918-e01f2fa1be73.png", type: "completed" },
     { name: "Grindwell - Nortan", logo: "https://companieslogo.com/img/orig/GRINDWELL.NS-155a919c.png?t=1720244492", type: "completed" },
@@ -168,7 +168,7 @@ const CLIENTS: Client[] = [
     { name: "Indo Rama Cements Ltd", logo: "https://upload.wikimedia.org/wikipedia/commons/7/7c/INDORAMA.jpg", type: "completed" },
     { name: "Ispat Industries Limited", logo: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSOF4o8a3P__AGJ2J2-YN-c2Mbz8ojrVQUO7g&s", type: "completed" },
     { name: "Khopoli Municipal Council", logo: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSKL-KUveVs56V4BYYzDxYxoBYvQYTf6StJqQ&s", type: "completed" },
-    { name: "Krantivan", logo: "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgZmlsbD0iI2Y1ZjVmNSIvPjx0ZXh0IHg9IjUwJSIgeT0iNTAlIiBmb250LXNpemU9IjE2IiBmaWxsPSIjNjY2IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBkb21pbmFudC1iYXNlbGluZT0ibWlkZGxlIj5LPC90ZXh0Pjwvc3ZnPg==", type: "completed" },
+    { name: "Krantivan", logo: "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgZmlsbD0iI2Y1ZjVmNSIvPjx0ZXh0IHg9IjUwJSIgeT0iNTAlIiBmb250LXNpemU9IjE2IiBmaWxsPSIjNjY2IiB0ZXh0LWFuYGhvci0ibWlkZGxlIiBkb21pbmFudC1iYXNlbGluZT0ibWlkZGxlIj5LPC90ZXh0Pjwvc3ZnPg==", type: "completed" },
     { name: "Lona Industries Limited", logo: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSjxlXhBdv0QU9mzSU5o7Vwj75Fh_94SAKoEw&s", type: "completed" },
     { name: "M/s East Coast Constructions Limited", logo: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSFkyeE3PLGh4rgjwLFySVWP596M4yGo7rGIQ&s", type: "completed" },
     { name: "M/s Penguin Petrochemicals Private Limited", logo: "https://www.penguinpetro.com/images/penguin-logo.png", type: "completed" },
@@ -183,11 +183,11 @@ const CLIENTS: Client[] = [
 
 // --- NEW: ACTIVE VENDORS LIST ---
 const ACTIVE_VENDORS: Client[] = [
-    { name: "AM/NS India", logo: "https://indiashippingnews.com/wp-content/uploads/2023/12/AMNS-New-e1703878483400-1.jpg", type: "vendor" },
+    { name: "AM/NS India", logo: "https://travel.amns.in/static/media/amns_transparent.bf237bba696c0751e0b1.png", type: "vendor" },
     { name: "SKI Carbon", logo: "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgZmlsbD0iI2Y1ZjVmNSIvPjx0ZXh0IHg9IjUwJSIgeT0iNTAlIiBmb250LXNpemU9IjE2IiBmaWxsPSIjNjY2IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBkb21pbmFudC1iYXNlbGluZT0ibWlkZGxlIj5TS0k8L3RleHQ+PC9zdmc+", type: "vendor" },
     { name: "Alta Laboratories Ltd", logo: "https://www.pharmacompass.com/image/logo/alta-laboratories-1652261249.png", type: "vendor" },
     { name: "Renuka Sugar", logo: "https://indianpsu.com/wp-content/uploads/2023/05/Shree-Renuka-Sugars-Limited-Logo-3.jpg", type: "vendor" },
-    { name: "Jindal Stainless Steelway", logo: "https://upload.wikimedia.org/wikipedia/commons/3/3c/Jindal_Steel_Limited_Logo.png", type: "vendor" },
+    { name: "Jindal Stainless Steelway", logo: "https://image.pitchbook.com/NaIoQV3I21nj3iKo1KFxwtQgYQG1712152282393_200x200", type: "vendor" },
 ];
 
 // --- PROJECTS CONSTANT REMOVED ---
@@ -358,7 +358,7 @@ const Footer: React.FC<{ onNavigate: (page: string) => void }> = ({ onNavigate }
 // --- END OF UPDATED FOOTER ---
 
 
-// --- CORRECTED HERO COMPONENT ---
+// --- HERO COMPONENT (BUTTON REMOVED) ---
 const Hero: React.FC<{ onNavigate: (page: string) => void }> = ({ onNavigate }) => {
     const handleLinkClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
         e.preventDefault();
@@ -372,27 +372,19 @@ const Hero: React.FC<{ onNavigate: (page: string) => void }> = ({ onNavigate }) 
                 <img src="https://images.unsplash.com/photo-1541888946425-d81bb19240f5?q=80&w=2070&auto=format&fit=crop" alt="Large-scale construction site" className="w-full h-full object-cover" />
             </div>
             <div className="relative z-20 text-center px-4">
-                <h1 className="text-4xl md:text-6xl font-extrabold mb-4 leading-tight drop-shadow-lg"> {/* Reduced bottom margin here for spacing */}
+                <h1 className="text-4xl md:text-6xl font-extrabold mb-4 leading-tight drop-shadow-lg">
                     A Legacy of Excellence in Construction
                 </h1>
-                {/* --- RESTORED THE DESCRIPTIVE LINE --- */}
-                <p className="text-lg md:text-xl text-gray-200 mb-8 max-w-2xl mx-auto drop-shadow-md">
+                <p className="text-lg md:text-xl text-gray-200 max-w-2xl mx-auto drop-shadow-md">
                     Executing residential, commercial, and industrial projects with a commitment to quality,
                     safety, and reliability.
                 </p>
-                {/* --- SHORTENED THE BUTTON SIZE --- */}
-                <a
-                    href="/about" // Use the target page path
-                    onClick={(e) => handleLinkClick(e, '/about')}
-                    className="inline-block bg-yellow-600 text-white px-6 py-2 rounded-md text-base font-semibold hover:bg-yellow-700 transition-colors shadow-md"
-                >
-                    Learn More About Us
-                </a>
+                {/* --- BUTTON REMOVED FROM HERO --- */}
             </div>
         </section>
     );
 };
-// --- END OF CORRECTED HERO ---
+// --- END OF HERO COMPONENT ---
 
 
 const About: React.FC = () => {
@@ -802,4 +794,3 @@ const App: React.FC = () => {
 };
 
 export default App;
-
