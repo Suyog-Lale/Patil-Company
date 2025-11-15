@@ -15,12 +15,3 @@ export interface Client {
   type: 'completed' | 'ongoing';
 }
 
-export type ProjectCategory = 'Industrial' | 'Commercial' | 'Residential';
-
-export interface Project {
-  id: number;
-  title: string;
-  description: string;
-  category: ProjectCategory;
-  imageUrl: string;
-}

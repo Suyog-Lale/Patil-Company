@@ -159,7 +159,7 @@ const CLIENTS: Client[] = [
     // If 'imag' was meant to be imported like the logo, it needs a proper import.
     // Using a placeholder string for now. If you have an image, import it like 'logo'.
     // --- FIX: Using relative paths for placeholder logos ---
-    { name: "AM/NS India", logo: "https://travel.amns.in/static/media/amns_transparent.bf237bba696c0751e0b1.png", type: "completed" }, // Example: Replace with actual path or import
+    { name: "AM/NS India", logo: "./assets/amns-logo.png", type: "completed" }, // Example: Replace with actual path or import
     { name: "Pepsico International - Frito Lay", logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a6/PepsiCo_logo.svg/1200px-PepsiCo_logo.svg.png", type: "completed" },
     { name: "H & R. Johnson (I.) Limited", logo: "https://d2ki7eiqd260sq.cloudfront.net/CORPORATE-LOGO-NEW6130d7d5-8c2c-41c1-8918-e01f2fa1be73.png", type: "completed" },
     { name: "Grindwell - Nortan", logo: "https://companieslogo.com/img/orig/GRINDWELL.NS-155a919c.png?t=1720244492", type: "completed" },
@@ -187,7 +187,7 @@ const ACTIVE_VENDORS: Client[] = [
     { name: "SKI Carbon", logo: "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgZmlsbD0iI2Y1ZjVmNSIvPjx0ZXh0IHg9IjUwJSIgeT0iNTAlIiBmb250LXNpemU9IjE2IiBmaWxsPSIjNjY2IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBkb21pbmFudC1iYXNlbGluZT0ibWlkZGxlIj5TS0k8L3RleHQ+PC9zdmc+", type: "vendor" },
     { name: "Alta Laboratories Ltd", logo: "https://www.pharmacompass.com/image/logo/alta-laboratories-1652261249.png", type: "vendor" },
     { name: "Renuka Sugar", logo: "https://indianpsu.com/wp-content/uploads/2023/05/Shree-Renuka-Sugars-Limited-Logo-3.jpg", type: "vendor" },
-    { name: "Jindal Stainless Steelway", logo: "https://image.pitchbook.com/NaIoQV3I21nj3iKo1KFxwtQgYQG1712152282393_200x200", type: "vendor" },
+    { name: "Jindal Stainless Steelway", logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/2/24/Jindal_Stainless_Logo.svg/1200px-Jindal_Stainless_Logo.svg.png", type: "vendor" },
 ];
 
 // --- PROJECTS CONSTANT REMOVED ---
@@ -566,13 +566,18 @@ const ClientsPage: React.FC = () => {
 // --- PROJECTS PAGE COMPONENT REMOVED ---
 // const ProjectsPage: React.FC = () => { ... };
 
+// --- UPDATED CONTACT PAGE ---
 const ContactPage: React.FC = () => {
     const sectionRef = useScrollAnimation<HTMLElement>();
     return (
         <section id="contact" className="py-20 bg-gray-50 fade-in-section min-h-screen" ref={sectionRef}>
             <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-                <div className="text-center mb-12"><h2 className="text-3xl font-extrabold text-gray-900 sm:text-4xl">Get In Touch</h2><p className="mt-4 text-lg text-gray-600">We're Here to Help Build Your Vision</p></div>
-                <div className="max-w-2xl mx-auto">
+                {/* --- "Get In Touch" h2 removed, styles moved to p tag --- */}
+                <div className="text-center mb-12">
+                    <p className="text-3xl font-extrabold text-gray-900 sm:text-4xl">We're Here to Help Build Your Vision</p>
+                </div>
+                
+                <div className="max-w-2xl mx-auto"> {/* Removed mt-12 */}
                     <div className="bg-white p-8 rounded-lg shadow-lg border border-gray-200">
                         <h3 className="text-2xl font-bold text-gray-800 mb-4">Contact Details</h3>
                         <p className="text-gray-600 mb-6">For business inquiries write to, call, email or WhatsApp us.</p>
@@ -588,6 +593,7 @@ const ContactPage: React.FC = () => {
         </section>
     );
 };
+// --- END OF UPDATED CONTACT PAGE ---
 
 const PoliciesPage: React.FC = () => (
     <section id="policies" className="py-16 bg-gray-50 min-h-screen">
