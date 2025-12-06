@@ -4,6 +4,8 @@ import React, { useState, useEffect, useRef } from "react";
 
 // --- FIX: Using relative path for logo import ---
 import logo from "./assets/logo.jpeg";
+import logo from ".assets/Jindal_Steel_Limited_Logo.png";
+import logo from ".assets/krantivan.jpg";
 
 // --- TYPES (from types.ts) ---
 interface NavLink {
