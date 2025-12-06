@@ -29,6 +29,7 @@ interface Client {
 }
 
 // --- CONSTANTS ---
+// UPDATED: Added "Contact" back here so it shares the same dynamic styling as other links
 const NAV_LINKS: NavLink[] = [
   { name: "Home", href: "/" },
   { name: "Services", href: "/services" },
@@ -171,7 +172,7 @@ const ACTIVE_VENDORS: Client[] = [
     { name: "AM/NS India", logo: "https://travel.amns.in/static/media/amns_transparent.bf237bba696c0751e0b1.png", type: "vendor" },
     { name: "SKI Carbon", logo: "https://www.birlacarbon.com/wp-content/uploads/2017/01/aditya-birla-logo-retina.png", type: "vendor" },
     { name: "Alta Laboratories Ltd", logo: "https://www.pharmacompass.com/image/logo/alta-laboratories-1652261249.png", type: "vendor" },
-    { name: "H & R. Johnson (I.) Limited", logo: "https://d2ki7eiqd260sq.cloudfront.net/CORPORATE-LOGO-NEW6130d7d5-8c2c-41c1-8918-e01f2fa1be73.png", type: "completed" },
+    { name: "H & R. Johnson (I.) Limited", logo: "https://d2ki7eiqd260sq.cloudfront.net/CORPORATE-LOGO-NEW6130d7d5-8c2c-41c1-8918-e01f2fa1be73.png", type: "vendor" },
     { name: "Renuka Sugar", logo: "https://indianpsu.com/wp-content/uploads/2023/05/Shree-Renuka-Sugars-Limited-Logo-3.jpg", type: "vendor" },
     { name: "Jindal Stainless Steelway", logo: jindalLogo, type: "vendor" },
 ];
@@ -231,19 +232,28 @@ const Header: React.FC<{ onNavigate: (page: string) => void, currentPage: string
                     </div>
                     <div className="hidden md:block">
                         <nav className="ml-10 flex items-baseline space-x-4">
-                            {NAV_LINKS.map((link) => (
-                                <a
-                                    key={link.name}
-                                    href={link.href}
-                                    onClick={(e) => handleLinkClick(e, link.href)}
-                                    className={`${currentPage === link.href || (currentPage === '/' && link.href === '/') ? 'text-yellow-600' : 'text-gray-700'} hover:text-yellow-600 px-3 py-2 rounded-md text-sm font-medium transition-colors`}
-                                >
-                                    {link.name}
-                                </a>
-                            ))}
-                            <a href="/contact" onClick={(e) => handleLinkClick(e, '/contact')} className="ml-4 bg-yellow-600 text-white px-4 py-2 rounded-md text-sm font-medium hover:bg-yellow-700 transition-colors">
-                                Contact
-                            </a>
+                            {NAV_LINKS.map((link) => {
+                                // Determine if this link is currently active
+                                const isActive = currentPage === link.href || (currentPage === '/' && link.href === '/');
+                                
+                                return (
+                                    <a
+                                        key={link.name}
+                                        href={link.href}
+                                        onClick={(e) => handleLinkClick(e, link.href)}
+                                        // Dynamic Styling: 
+                                        // If active -> Yellow Background + White Text
+                                        // If not active -> Gray Text + Hover effect
+                                        className={`${
+                                            isActive 
+                                                ? 'bg-yellow-600 text-white shadow-md' 
+                                                : 'text-gray-700 hover:bg-gray-100 hover:text-yellow-600'
+                                        } px-3 py-2 rounded-md text-sm font-medium transition-all duration-200`}
+                                    >
+                                        {link.name}
+                                    </a>
+                                );
+                            })}
                         </nav>
                     </div>
                     <div className="-mr-2 flex md:hidden">
@@ -258,19 +268,23 @@ const Header: React.FC<{ onNavigate: (page: string) => void, currentPage: string
             {isOpen && (
                 <div className="md:hidden" id="mobile-menu">
                     <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3 bg-white border-t border-gray-200">
-                        {NAV_LINKS.map((link) => (
-                            <a
-                                key={link.name}
-                                href={link.href}
-                                onClick={(e) => handleLinkClick(e, link.href)}
-                                className="text-gray-700 hover:text-yellow-600 block px-3 py-2 rounded-md text-base font-medium"
-                            >
-                                {link.name}
-                            </a>
-                        ))}
-                        <a href="/contact" onClick={(e) => handleLinkClick(e, '/contact')} className="bg-yellow-600 text-white block w-full text-left px-3 py-2 rounded-md text-base font-medium hover:bg-yellow-700 mt-2">
-                            Contact
-                        </a>
+                        {NAV_LINKS.map((link) => {
+                             const isActive = currentPage === link.href || (currentPage === '/' && link.href === '/');
+                             return (
+                                <a
+                                    key={link.name}
+                                    href={link.href}
+                                    onClick={(e) => handleLinkClick(e, link.href)}
+                                    className={`${
+                                        isActive 
+                                            ? 'bg-yellow-600 text-white' 
+                                            : 'text-gray-700 hover:text-yellow-600 hover:bg-gray-50'
+                                    } block px-3 py-2 rounded-md text-base font-medium`}
+                                >
+                                    {link.name}
+                                </a>
+                             );
+                        })}
                     </div>
                 </div>
             )}
@@ -284,15 +298,9 @@ const Footer: React.FC<{ onNavigate: (page: string) => void }> = ({ onNavigate }
         e.preventDefault();
         onNavigate(href);
     };
-
-    const originalNavLinksPlusContact = [
-        { name: "Home", href: "/" },
-        { name: "Services", href: "/services" },
-        { name: "Clients", href: "/clients" },
-        { name: "Policies", href: "/policies" }, 
-        { name: "Contact", href: "/contact" }
-    ];
-
+    
+    // Using the constant but adding Policies for footer only
+    const footerLinks = [...NAV_LINKS, { name: "Policies", href: "/policies" }];
 
     return (
         <footer className="bg-gray-800 text-gray-400 border-t border-gray-700">
@@ -311,7 +319,7 @@ const Footer: React.FC<{ onNavigate: (page: string) => void }> = ({ onNavigate }
 
                     <nav>
                         <ul className="flex flex-wrap justify-center sm:justify-end items-center space-x-4 sm:space-x-6">
-                            {originalNavLinksPlusContact.map(link => (
+                            {footerLinks.map(link => (
                                 <li key={link.name}>
                                     <a
                                         href={link.href}
@@ -559,22 +567,22 @@ const PoliciesPage: React.FC = () => (
                 <h3 className="text-xl font-semibold text-gray-800">Privacy Policy</h3>
                 <p>We respect your privacy and are committed to protecting any personal information shared through inquiries on this site.</p>
                 <div className="pl-4 mt-4 space-y-4 border-l-2 border-gray-300 ml-2">
-                   <div>
-                       <h4 className="text-lg font-semibold text-gray-800">Information Collection</h4>
-                       <p className="text-gray-600">We may collect personal data such as names, email addresses, and phone numbers provided voluntarily by users for communication purposes.</p>
-                   </div>
-                   <div>
-                       <h4 className="text-lg font-semibold text-gray-800">Use of Information</h4>
-                       <p className="text-gray-600">Collected data will only be used to respond to inquiries or provide requested services and will not be shared with third parties without consent.</p>
-                   </div>
-                   <div>
-                       <h4 className="text-lg font-semibold text-gray-800">Data Protection</h4>
-                       <p className="text-gray-600">We implement reasonable security measures to safeguard your information against unauthorized access or breaches.</p>
-                   </div>
-                   <div>
-                       <h4 className="text-lg font-semibold text-gray-800">Removal Requests</h4>
-                       <p className="text-gray-600">Users may contact us to request deletion of their personal data at any time.</p>
-                   </div>
+                    <div>
+                        <h4 className="text-lg font-semibold text-gray-800">Information Collection</h4>
+                        <p className="text-gray-600">We may collect personal data such as names, email addresses, and phone numbers provided voluntarily by users for communication purposes.</p>
+                    </div>
+                    <div>
+                        <h4 className="text-lg font-semibold text-gray-800">Use of Information</h4>
+                        <p className="text-gray-600">Collected data will only be used to respond to inquiries or provide requested services and will not be shared with third parties without consent.</p>
+                    </div>
+                    <div>
+                        <h4 className="text-lg font-semibold text-gray-800">Data Protection</h4>
+                        <p className="text-gray-600">We implement reasonable security measures to safeguard your information against unauthorized access or breaches.</p>
+                    </div>
+                    <div>
+                        <h4 className="text-lg font-semibold text-gray-800">Removal Requests</h4>
+                        <p className="text-gray-600">Users may contact us to request deletion of their personal data at any time.</p>
+                    </div>
                 </div>
              </div>
               <hr className="border-gray-200" />
