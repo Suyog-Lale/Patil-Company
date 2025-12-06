@@ -29,7 +29,6 @@ interface Client {
 }
 
 // --- CONSTANTS ---
-// UPDATED: Added "Contact" back here so it shares the same dynamic styling as other links
 const NAV_LINKS: NavLink[] = [
   { name: "Home", href: "/" },
   { name: "Services", href: "/services" },
@@ -499,7 +498,7 @@ const ClientsPage: React.FC = () => {
         <section id="clients" className="py-20 bg-gray-50 fade-in-section min-h-screen" ref={sectionRef}>
             <div className="container mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="text-center mb-12">
-                    <h2 className="text-3xl font-extrabold text-gray-900 sm:text-4xl">Our Clients</h2>                
+                    <h2 className="text-3xl font-extrabold text-gray-900 sm:text-4xl">Our Clients</h2>                 
                 </div>
                 <div>
                     {renderClientList(sortedAllClients)}
@@ -618,7 +617,10 @@ const App: React.FC = () => {
     };
 
     const [currentPage, setCurrentPage] = useState(getInitialPage());
-    const [isSiteEntered, setIsSiteEntered] = useState(false);
+    // FIXED: Initialize state by checking localStorage first
+    const [isSiteEntered, setIsSiteEntered] = useState(() => {
+        return localStorage.getItem('site_entered') === 'true';
+    });
 
     useEffect(() => {
         if (window.lucide) {
@@ -643,6 +645,8 @@ const App: React.FC = () => {
     };
 
     const handleEnter = () => {
+        // FIXED: Save 'true' to localStorage when user enters
+        localStorage.setItem('site_entered', 'true');
         setIsSiteEntered(true);
         handleNavigate(getInitialPage());
     };
