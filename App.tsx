@@ -1,10 +1,12 @@
 import React, { useState, useEffect, useRef } from "react";
-// It looks like you might not be using 'imag' anymore, consider removing if unused
-// import imag from "./assets/image.png"; // Use relative path if needed
-
-// --- FIX: Using relative path for logo import ---
+// --- FIXED IMPORTS ---
+// We import images so the build tool knows to bundle them correctly
 import logo from "./assets/logo.jpeg";
-// --- TYPES (from types.ts) ---
+// Make sure these filenames match exactly what is in your assets folder
+import jindalLogo from "./assets/Jindal_Steel_Limited_Logo.png"; 
+import krantivanLogo from "./assets/krantivan_logo.jpg"; 
+
+// --- TYPES ---
 interface NavLink {
   name: string;
   href: string;
@@ -22,22 +24,19 @@ interface ServiceCategory {
 
 interface Client {
   name: string;
-  logo?: string; // logo is a string URL or path
-  type: 'completed' | 'ongoing' | 'vendor'; // Added 'vendor' type
+  logo?: string; 
+  type: 'completed' | 'ongoing' | 'vendor';
 }
 
-// --- CONSTANTS (from constants.ts) ---
-// Using page paths for hash routing
+// --- CONSTANTS ---
 const NAV_LINKS: NavLink[] = [
   { name: "Home", href: "/" },
   { name: "Services", href: "/services" },
   { name: "Clients", href: "/clients" },
   { name: "Contact", href: "/contact" },
-  // { name: "Projects", href: "/projects" }, // Removed
-  // { name: "Policies", href: "/policies" }, // Removed
 ];
 
-// --- UPDATED: FULL 13 SERVICE CATEGORIES ---
+// --- SERVICE CATEGORIES ---
 const SERVICE_CATEGORIES: ServiceCategory[] = [
     {
         name: "Core Construction",
@@ -147,42 +146,43 @@ const SERVICE_CATEGORIES: ServiceCategory[] = [
         ],
     },
 ];
-// --- END OF UPDATED SERVICES ---
 
+// --- CLIENTS DATA ---
 const CLIENTS: Client[] = [
-    // Corrected logo path for AM/NS - assuming 'imag' was a placeholder for a specific image import
-    // If 'imag' was meant to be imported like the logo, it needs a proper import.
-    // Using a placeholder string for now. If you have an image, import it like 'logo'.
-    // --- FIX: Using relative paths for placeholder logos ---
     { name: "Pepsico International - Frito Lay", logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a6/PepsiCo_logo.svg/1200px-PepsiCo_logo.svg.png", type: "completed" },
     { name: "H & R. Johnson (I.) Limited", logo: "https://d2ki7eiqd260sq.cloudfront.net/CORPORATE-LOGO-NEW6130d7d5-8c2c-41c1-8918-e01f2fa1be73.png", type: "completed" },
     { name: "Grindwell - Nortan", logo: "https://companieslogo.com/img/orig/GRINDWELL.NS-155a919c.png?t=1720244492", type: "completed" },
+    { name: "Alta Laboratories Ltd", logo: "https://www.pharmacompass.com/image/logo/alta-laboratories-1652261249.png", type: "completed" },
     { name: "Colt Cables Limited", logo: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRPbJNdw2MoTkIEsq6yeodbeXeHO_CpWh1pQw&s", type: "completed" },
     { name: "Indo Rama Cements Ltd", logo: "https://upload.wikimedia.org/wikipedia/commons/7/7c/INDORAMA.jpg", type: "completed" },
     { name: "Ispat Industries Limited", logo: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSOF4o8a3P__AGJ2J2-YN-c2Mbz8ojrVQUO7g&s", type: "completed" },
     { name: "Khopoli Municipal Council", logo: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSKL-KUveVs56V4BYYzDxYxoBYvQYTf6StJqQ&s", type: "completed" },
-    { name: "Krantivan", logo: "assets/krantivan_logo.jpg", type: "completed" },
+    // --- FIX: Use the imported variable for Krantivan ---
+    { name: "Krantivan", logo: krantivanLogo, type: "completed" },
     { name: "Lona Industries Limited", logo: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSjxlXhBdv0QU9mzSU5o7Vwj75Fh_94SAKoEw&s", type: "completed" },
     { name: "M/s East Coast Constructions Limited", logo: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSFkyeE3PLGh4rgjwLFySVWP596M4yGo7rGIQ&s", type: "completed" },
     { name: "M/s Penguin Petrochemicals Private Limited", logo: "https://www.penguinpetro.com/images/penguin-logo.png", type: "completed" },
     { name: "M/s Wartsila India Limited", logo: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRnPlZ-tc4dUO6aUws5hfoWy2i3nZhqd5h4Eg&s", type: "completed" },
     { name: "Neelam Power Plant", logo: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQxtPGKIAiRzdCu-m7lBeg0wqRaR3JnPVNxFQ&s", type: "completed" },
     { name: "Ravin Cables Limited", logo: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSL2Dz1b4bSbphY_MmglgAG3-EXggNmSaTs_w&s", type: "completed" },
+    { name: "Renuka Sugar", logo: "https://indianpsu.com/wp-content/uploads/2023/05/Shree-Renuka-Sugars-Limited-Logo-3.jpg", type: "completed" },
+    { name: "SKI Carbon", logo: "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgZmlsbD0iI2Y1ZjVmNSIvPjx0ZXh0IHg9IjUwJSIgeT0iNTAlIiBmb250LXNpemU9IjE2IiBmaWxsPSIjNjY2IiB0ZXh0LWFuYGhvci0ibWlkZGxlIiBkb21pbmFudC1iYXNlbGluZT0ibWlkZGxlIj5TS0k8L3RleHQ+PC9zdmc+", type: "completed" },
     { name: "Simplex Concrete Piles India Limited", logo: "https://tipl.triamtmt.com/wp-content/uploads/2025/05/9.jpg", type: "completed" },
     { name: "Uttam Galva Steels Limited", logo: "https://www.equitybulls.com/equitybullsadmin/uploads/Uttam%20Galva%20Steels%20Limited%203.jpg", type: "completed" },
 ];
 
-// --- NEW: ACTIVE VENDORS LIST ---
+// --- ACTIVE VENDORS LIST ---
 const ACTIVE_VENDORS: Client[] = [
     { name: "AM/NS India", logo: "https://travel.amns.in/static/media/amns_transparent.bf237bba696c0751e0b1.png", type: "vendor" },
-    { name: "SKI Carbon", logo: "https://www.birlacarbon.com/wp-content/uploads/2017/01/aditya-birla-logo-retina.png", type: "vendor" },
+    { name: "SKI Carbon", logo: "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgZmlsbD0iI2Y1ZjVmNSIvPjx0ZXh0IHg9IjUwJSIgeT0iNTAlIiBmb250LXNpemU9IjE2IiBmaWxsPSIjNjY2IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBkb21pbmFudC1iYXNlbGluZT0ibWlkZGxlIj5TS0k8L3RleHQ+PC9zdmc+", type: "vendor" },
     { name: "Alta Laboratories Ltd", logo: "https://www.pharmacompass.com/image/logo/alta-laboratories-1652261249.png", type: "vendor" },
     { name: "Renuka Sugar", logo: "https://indianpsu.com/wp-content/uploads/2023/05/Shree-Renuka-Sugars-Limited-Logo-3.jpg", type: "vendor" },
-    { name: "Jindal Stainless Steelway", logo: "assets/Jindal_Steel_Limited_Logo.png", type: "vendor" },
+    // --- FIX: Use the imported variable for Jindal ---
+    { name: "Jindal Stainless Steelway", logo: jindalLogo, type: "vendor" },
 ];
 
 
-// --- HOOKS (from hooks/useScrollAnimation.ts) ---
+// --- HOOKS ---
 const useScrollAnimation = <T extends HTMLElement>() => {
   const ref = useRef<T>(null);
   useEffect(() => {
@@ -221,7 +221,7 @@ const Header: React.FC<{ onNavigate: (page: string) => void, currentPage: string
     const handleLinkClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
         e.preventDefault();
         onNavigate(href);
-        setIsOpen(false); // Close mobile menu on navigation
+        setIsOpen(false); 
     };
 
     return (
@@ -241,7 +241,6 @@ const Header: React.FC<{ onNavigate: (page: string) => void, currentPage: string
                                     key={link.name}
                                     href={link.href}
                                     onClick={(e) => handleLinkClick(e, link.href)}
-                                    // Highlight the current page link
                                     className={`${currentPage === link.href || (currentPage === '/' && link.href === '/') ? 'text-yellow-600' : 'text-gray-700'} hover:text-yellow-600 px-3 py-2 rounded-md text-sm font-medium transition-colors`}
                                 >
                                     {link.name}
@@ -284,20 +283,18 @@ const Header: React.FC<{ onNavigate: (page: string) => void, currentPage: string
     );
 };
 
-// --- MODIFIED FOOTER COMPONENT (MINIMALISTIC) ---
+// --- FOOTER COMPONENT ---
 const Footer: React.FC<{ onNavigate: (page: string) => void }> = ({ onNavigate }) => {
     const handleLinkClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
         e.preventDefault();
         onNavigate(href);
     };
 
-    // --- PROJECTS LINK REMOVED FROM FOOTER ---
     const originalNavLinksPlusContact = [
         { name: "Home", href: "/" },
         { name: "Services", href: "/services" },
         { name: "Clients", href: "/clients" },
-        // { name: "Projects", href: "/projects" }, // Removed
-        { name: "Policies", href: "/policies" }, // Keep in footer
+        { name: "Policies", href: "/policies" }, 
         { name: "Contact", href: "/contact" }
     ];
 
@@ -305,13 +302,10 @@ const Footer: React.FC<{ onNavigate: (page: string) => void }> = ({ onNavigate }
     return (
         <footer className="bg-gray-800 text-gray-400 border-t border-gray-700">
             <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-                {/* Main footer content aligned in a single row */}
                 <div className="flex flex-col sm:flex-row items-center justify-between h-24">
-
-                    {/* Left Side: Logo and Copyright */}
                     <div className="flex items-center mb-4 sm:mb-0">
                         <img
-                            src={logo} // Still using the old logo import
+                            src={logo} 
                             alt="Patil and Company Logo"
                             className="h-12 bg-white p-1 rounded-md"
                         />
@@ -320,10 +314,8 @@ const Footer: React.FC<{ onNavigate: (page: string) => void }> = ({ onNavigate }
                         </p>
                     </div>
 
-                    {/* Right Side: Horizontal Quick Links */}
                     <nav>
                         <ul className="flex flex-wrap justify-center sm:justify-end items-center space-x-4 sm:space-x-6">
-                            {/* Use the modified list with "Projects" removed */}
                             {originalNavLinksPlusContact.map(link => (
                                 <li key={link.name}>
                                     <a
@@ -337,16 +329,14 @@ const Footer: React.FC<{ onNavigate: (page: string) => void }> = ({ onNavigate }
                             ))}
                         </ul>
                     </nav>
-
                 </div>
             </div>
         </footer>
     );
 };
-// --- END OF UPDATED FOOTER ---
 
 
-// --- HERO COMPONENT (BUTTON REMOVED) ---
+// --- HERO COMPONENT ---
 const Hero: React.FC<{ onNavigate: (page: string) => void }> = ({ onNavigate }) => {
     const handleLinkClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
         e.preventDefault();
@@ -367,12 +357,10 @@ const Hero: React.FC<{ onNavigate: (page: string) => void }> = ({ onNavigate }) 
                     Executing residential, commercial, and industrial projects with a commitment to quality,
                     safety, and reliability.
                 </p>
-                {/* --- BUTTON REMOVED FROM HERO --- */}
             </div>
         </section>
     );
 };
-// --- END OF HERO COMPONENT ---
 
 
 const About: React.FC = () => {
@@ -404,11 +392,10 @@ const About: React.FC = () => {
 
 // --- PAGE COMPONENTS ---
 
-// --- FIX 1: Removed About from HomePage ---
 const HomePage: React.FC<{ onNavigate: (page: string) => void }> = ({ onNavigate }) => (
     <>
         <Hero onNavigate={onNavigate} />
-        {/* <About /> */} {/* Removed About from here */}
+        <About />
     </>
 );
 
@@ -421,7 +408,6 @@ const ServicesPage: React.FC = () => {
             <div className="container mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="text-center mb-12"><h2 className="text-3xl font-extrabold text-gray-900 sm:text-4xl">Our Services</h2><p className="mt-4 text-lg text-gray-600">Comprehensive Solutions for Every Need</p></div>
                 <div className="flex flex-col">
-                    {/* --- TABS FOR SERVICES --- */}
                     <div className="mb-8 border-b border-gray-200">
                         <div className="flex flex-wrap -mb-px justify-center" role="tablist" aria-orientation="horizontal">
                             {SERVICE_CATEGORIES.map((category, index) => (
@@ -439,7 +425,6 @@ const ServicesPage: React.FC = () => {
                             ))}
                         </div>
                     </div>
-                    {/* --- TAB PANELS --- */}
                     <div className="bg-gray-50 p-8 rounded-lg shadow-inner">
                         {SERVICE_CATEGORIES.map((category, index) => (
                             <div 
@@ -471,38 +456,25 @@ const ServicesPage: React.FC = () => {
     );
 };
 
-// --- UPDATED CLIENTS PAGE COMPONENT WITH UNIFIED LIST ---
+// --- CLIENTS PAGE ---
 const ClientsPage: React.FC = () => {
     const sectionRef = useScrollAnimation<HTMLElement>();
-    // No activeTab state needed as we are showing all clients in one view
-
-    // --- SORTING AND COMBINING ---
-    // 1. Combine both lists into a single array
     const allClients = [...CLIENTS, ...ACTIVE_VENDORS];
-    
-    // 2. Sort the combined list alphabetically by name
     const sortedAllClients = allClients.sort((a, b) => a.name.localeCompare(b.name));
 
-    // Helper function to render a list of clients with specific styling based on type
     const renderClientList = (clients: Client[]) => (
         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6">
             {clients.map((client, index) => {
-                // Determine border color based on client type
                 const borderColorClass = client.type === 'vendor' ? 'border-green-500' : 'border-gray-800';
-                
                 return (
                     <div 
-                      // Use index in key to ensure uniqueness if names duplicate (e.g. same company in both lists)
                       key={`${client.name}-${index}`} 
-                      // Dynamic border color class
-                      // --- FIX: CHANGED BORDER WIDTH FROM 2 to 4 ---
                       className={`flex flex-col justify-between items-center text-center p-4 bg-white border-4 ${borderColorClass} rounded-lg h-40 hover:shadow-md transition-shadow`}
                     >
                         <div className="flex-grow flex items-center justify-center w-full h-full overflow-hidden">
                             <img
                                src={client.logo || 'https://placehold.co/100x60/eee/ccc?text=Logo'}
                                alt={client.name}
-                               // --- FIX: REMOVED client-logo CLASS (REMOVED GRAYSCALE) ---
                                className="max-h-16 max-w-[80%] object-contain mx-auto"
                                onError={(e) => {
                                  const target = e.target as HTMLImageElement;
@@ -526,22 +498,17 @@ const ClientsPage: React.FC = () => {
                 <div className="text-center mb-12">
                     <h2 className="text-3xl font-extrabold text-gray-900 sm:text-4xl">Our Clients & Vendors</h2>
                     <p className="mt-4 text-lg text-gray-600">Our Commitment to Quality has Earned Their Trust</p>
-                    {/* Added legend for clarity */}
                     <div className="flex justify-center gap-6 mt-6 text-sm">
                         <div className="flex items-center gap-2">
-                            {/* --- FIX: CHANGED BORDER WIDTH FROM 2 to 4 --- */}
                             <div className="w-4 h-4 border-4 border-gray-800 bg-white rounded-sm"></div>
                             <span>Completed Clients</span>
                         </div>
                         <div className="flex items-center gap-2">
-                            {/* --- FIX: CHANGED BORDER WIDTH FROM 2 to 4 --- */}
                             <div className="w-4 h-4 border-4 border-green-500 bg-white rounded-sm"></div>
                             <span>Active Vendors</span>
                         </div>
                     </div>
                 </div>
-
-                {/* --- Unified List Content --- */}
                 <div>
                     {renderClientList(sortedAllClients)}
                 </div>
@@ -549,21 +516,18 @@ const ClientsPage: React.FC = () => {
         </section>
     );
 };
-// --- END OF UPDATED CLIENTS PAGE ---
 
 
-// --- CONTACT PAGE ---
 const ContactPage: React.FC = () => {
     const sectionRef = useScrollAnimation<HTMLElement>();
     return (
         <section id="contact" className="py-20 bg-gray-50 fade-in-section min-h-screen" ref={sectionRef}>
             <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-                {/* --- "Get In Touch" h2 removed, styles moved to p tag --- */}
                 <div className="text-center mb-12">
                     <p className="text-3xl font-extrabold text-gray-900 sm:text-4xl">We're Here to Help Build Your Vision</p>
                 </div>
                 
-                <div className="max-w-2xl mx-auto"> {/* Removed mt-12 */}
+                <div className="max-w-2xl mx-auto"> 
                     <div className="bg-white p-8 rounded-lg shadow-lg border border-gray-200">
                         <h3 className="text-2xl font-bold text-gray-800 mb-4">Contact Details</h3>
                         <p className="text-gray-600 mb-6">For business inquiries write to, call, email or WhatsApp us.</p>
@@ -579,7 +543,6 @@ const ContactPage: React.FC = () => {
         </section>
     );
 };
-// --- END OF UPDATED CONTACT PAGE ---
 
 const PoliciesPage: React.FC = () => (
     <section id="policies" className="py-16 bg-gray-50 min-h-screen">
@@ -653,35 +616,28 @@ declare global {
 }
 
 const App: React.FC = () => {
-    // Determine the initial page from the URL hash, default to '/'
     const getInitialPage = () => {
         const hash = window.location.hash.slice(1);
-        // Ensure the hash starts with a '/' for consistency
         if (hash && hash.startsWith('/')) {
             return hash;
         } else if (hash) {
-            return `/${hash}`; // Add leading slash if missing
+            return `/${hash}`;
         }
-        return '/'; // Default to homepage
+        return '/';
     };
 
     const [currentPage, setCurrentPage] = useState(getInitialPage());
-
-    // --- NEW: STATE FOR SPLASH SCREEN ---
     const [isSiteEntered, setIsSiteEntered] = useState(false);
 
-    // Effect to run createIcons on initial load and page changes
     useEffect(() => {
         if (window.lucide) {
             window.lucide.createIcons();
         }
-        // Dependency array includes currentPage to re-run when the page changes
-    }, [currentPage, isSiteEntered]); // Re-run when site is entered as well
+    }, [currentPage, isSiteEntered]);
 
-    // Handle hash changes for back/forward navigation
     useEffect(() => {
         const handleHashChange = () => {
-            setCurrentPage(getInitialPage()); // Use the same logic to set page on hash change
+            setCurrentPage(getInitialPage());
         };
         window.addEventListener('hashchange', handleHashChange);
         return () => {
@@ -690,36 +646,26 @@ const App: React.FC = () => {
     }, []);
 
     const handleNavigate = (page: string) => {
-        // Update the URL hash (make sure it starts with '/')
         const targetHash = page.startsWith('/') ? page : `/${page}`;
         window.location.hash = targetHash;
-        // The state will be updated automatically by the 'hashchange' event listener
-        window.scrollTo(0, 0); // Scroll to top after navigation
+        window.scrollTo(0, 0);
     };
 
-    // --- NEW: Function to handle entering the site ---
     const handleEnter = () => {
         setIsSiteEntered(true);
-        // Navigate to the initial page (which might be from a hash)
         handleNavigate(getInitialPage());
     };
 
     const renderPage = () => {
-        // Use the currentPage state which is synced with the hash
         switch (currentPage) {
             case '/':
-                // Pass handleNavigate down to HomePage so Hero can use it
                 return <HomePage onNavigate={handleNavigate} />;
             case '/services':
                 return <ServicesPage />;
             case '/clients':
                 return <ClientsPage />;
-            // --- FIX 2: Added /about case ---
-            case '/about': // Add this case
-                return <About />; // Render the About component
-            // --- PROJECTS CASE REMOVED ---
-            // case '/projects':
-            //     return <ProjectsPage />;
+            case '/about':
+                return <About />;
             case '/contact':
                 return <ContactPage />;
             case '/policies':
@@ -737,20 +683,17 @@ const App: React.FC = () => {
         }
     };
 
-    // --- NEW: Conditional Rendering for Splash Screen ---
     if (!isSiteEntered) {
         return (
-            // Splash Screen Component
             <section className="relative h-screen flex items-center justify-center text-white bg-black">
                 <div className="absolute inset-0 bg-black opacity-60 z-10"></div>
                 <div className="absolute inset-0 overflow-hidden">
-                    {/* Re-using the hero background image */}
                     <img src="https://images.unsplash.com/photo-1541888946425-d81bb19240f5?q=80&w=2070&auto=format&fit=crop" alt="Background" className="w-full h-full object-cover" />
                 </div>
                 <div className="relative z-20 text-center px-4">
                     <img src={logo}
                         alt="Patil and Company Logo"
-                        className="h-24 w-auto mx-auto mb-6 bg-white p-2 rounded-lg shadow-md animate-fadeInUp" // Using animation
+                        className="h-24 w-auto mx-auto mb-6 bg-white p-2 rounded-lg shadow-md animate-fadeInUp"
                     />
                     <h1
                         className="text-4xl md:text-6xl font-extrabold mb-8 leading-tight drop-shadow-lg animate-fadeInUp"
@@ -770,16 +713,12 @@ const App: React.FC = () => {
         );
     }
 
-    // --- Original return for the main site ---
     return (
         <div className="bg-white">
-            {/* Pass currentPage to Header for highlighting */}
             <Header onNavigate={handleNavigate} currentPage={currentPage} />
             <main>
                 {renderPage()}
-                 {/* --- TYPO REMOVED FROM HERE --- */}
             </main>
-            {/* Footer also needs onNavigate */}
             <Footer onNavigate={handleNavigate} />
         </div>
     );
