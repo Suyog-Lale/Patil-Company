@@ -4,9 +4,6 @@ import React, { useState, useEffect, useRef } from "react";
 
 // --- FIX: Using relative path for logo import ---
 import logo from "./assets/logo.jpeg";
-import jind from ".assets/Jindal_Steel_Limited_Logo.png";
-import krant from ".assets/krantivan.jpg";
-
 // --- TYPES (from types.ts) ---
 interface NavLink {
   name: string;
@@ -31,11 +28,11 @@ interface Client {
 
 // --- CONSTANTS (from constants.ts) ---
 // Using page paths for hash routing
-// UPDATED: Removed Projects and Policies
 const NAV_LINKS: NavLink[] = [
   { name: "Home", href: "/" },
   { name: "Services", href: "/services" },
   { name: "Clients", href: "/clients" },
+  { name: "Contact", href: "/contact" },
   // { name: "Projects", href: "/projects" }, // Removed
   // { name: "Policies", href: "/policies" }, // Removed
 ];
@@ -164,7 +161,7 @@ const CLIENTS: Client[] = [
     { name: "Indo Rama Cements Ltd", logo: "https://upload.wikimedia.org/wikipedia/commons/7/7c/INDORAMA.jpg", type: "completed" },
     { name: "Ispat Industries Limited", logo: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSOF4o8a3P__AGJ2J2-YN-c2Mbz8ojrVQUO7g&s", type: "completed" },
     { name: "Khopoli Municipal Council", logo: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSKL-KUveVs56V4BYYzDxYxoBYvQYTf6StJqQ&s", type: "completed" },
-    { name: "Krantivan", logo: "assets/krantivan.jpg", type: "completed" },
+    { name: "Krantivan", logo: "assets/krantivan_logo.jpg", type: "completed" },
     { name: "Lona Industries Limited", logo: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSjxlXhBdv0QU9mzSU5o7Vwj75Fh_94SAKoEw&s", type: "completed" },
     { name: "M/s East Coast Constructions Limited", logo: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSFkyeE3PLGh4rgjwLFySVWP596M4yGo7rGIQ&s", type: "completed" },
     { name: "M/s Penguin Petrochemicals Private Limited", logo: "https://www.penguinpetro.com/images/penguin-logo.png", type: "completed" },
@@ -178,10 +175,10 @@ const CLIENTS: Client[] = [
 // --- NEW: ACTIVE VENDORS LIST ---
 const ACTIVE_VENDORS: Client[] = [
     { name: "AM/NS India", logo: "https://travel.amns.in/static/media/amns_transparent.bf237bba696c0751e0b1.png", type: "vendor" },
-    { name: "SKI Carbon", logo: "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgZmlsbD0iI2Y1ZjVmNSIvPjx0ZXh0IHg9IjUwJSIgeT0iNTAlIiBmb250LXNpemU9IjE2IiBmaWxsPSIjNjY2IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBkb21pbmFudC1iYXNlbGluZT0ibWlkZGxlIj5TS0k8L3RleHQ+PC9zdmc+", type: "vendor" },
+    { name: "SKI Carbon", logo: "https://www.birlacarbon.com/wp-content/uploads/2017/01/aditya-birla-logo-retina.png", type: "vendor" },
     { name: "Alta Laboratories Ltd", logo: "https://www.pharmacompass.com/image/logo/alta-laboratories-1652261249.png", type: "vendor" },
     { name: "Renuka Sugar", logo: "https://indianpsu.com/wp-content/uploads/2023/05/Shree-Renuka-Sugars-Limited-Logo-3.jpg", type: "vendor" },
-    { name: "Jindal Stainless Steelway", logo: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSzj5X_x5xvV84DQoErXfuYjvKxeLi-fDx1Pw&s", type: "vendor" },
+    { name: "Jindal Stainless Steelway", logo: "assets/Jindal_Steel_Limited_Logo.png", type: "vendor" },
 ];
 
 
@@ -505,7 +502,8 @@ const ClientsPage: React.FC = () => {
                             <img
                                src={client.logo || 'https://placehold.co/100x60/eee/ccc?text=Logo'}
                                alt={client.name}
-                               className="max-h-16 max-w-[80%] client-logo object-contain mx-auto"
+                               // --- FIX: REMOVED client-logo CLASS (REMOVED GRAYSCALE) ---
+                               className="max-h-16 max-w-[80%] object-contain mx-auto"
                                onError={(e) => {
                                  const target = e.target as HTMLImageElement;
                                  target.onerror = null;
