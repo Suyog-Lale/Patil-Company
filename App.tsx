@@ -409,7 +409,7 @@ const ServicesPage: React.FC = () => {
     return (
         <section id="services" className="py-20 bg-white fade-in-section min-h-screen" ref={sectionRef}>
             <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-                <div className="text-center mb-12"><h2 className="text-3xl font-extrabold text-gray-900 sm:text-4xl">Our Services</h2><p className="mt-4 text-lg text-gray-600">Comprehensive Solutions for Every Need</p></div>
+                <div className="text-center mb-12"><h2 className="text-3xl font-extrabold text-gray-900 sm:text-4xl">Our Services</h2> </div>
                 <div className="flex flex-col">
                     <div className="mb-8 border-b border-gray-200">
                         <div className="flex flex-wrap -mb-px justify-center" role="tablist" aria-orientation="horizontal">
@@ -516,7 +516,6 @@ const ContactPage: React.FC = () => {
         <section id="contact" className="py-20 bg-gray-50 fade-in-section min-h-screen" ref={sectionRef}>
             <div className="container mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="text-center mb-12">
-                    <p className="text-3xl font-extrabold text-gray-900 sm:text-4xl">We're Here to Help Build Your Vision</p>
                 </div>
                 
                 <div className="max-w-2xl mx-auto"> 
