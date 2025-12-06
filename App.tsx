@@ -181,7 +181,7 @@ const ACTIVE_VENDORS: Client[] = [
     { name: "SKI Carbon", logo: "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgZmlsbD0iI2Y1ZjVmNSIvPjx0ZXh0IHg9IjUwJSIgeT0iNTAlIiBmb250LXNpemU9IjE2IiBmaWxsPSIjNjY2IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBkb21pbmFudC1iYXNlbGluZT0ibWlkZGxlIj5TS0k8L3RleHQ+PC9zdmc+", type: "vendor" },
     { name: "Alta Laboratories Ltd", logo: "https://www.pharmacompass.com/image/logo/alta-laboratories-1652261249.png", type: "vendor" },
     { name: "Renuka Sugar", logo: "https://indianpsu.com/wp-content/uploads/2023/05/Shree-Renuka-Sugars-Limited-Logo-3.jpg", type: "vendor" },
-    { name: "Jindal Stainless Steelway", logo: "assets/Jindal_Steel_Limited_Logo.png", type: "vendor" },
+    { name: "Jindal Stainless Steelway", logo: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSzj5X_x5xvV84DQoErXfuYjvKxeLi-fDx1Pw&s", type: "vendor" },
 ];
 
 
