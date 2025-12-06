@@ -150,23 +150,18 @@ const SERVICE_CATEGORIES: ServiceCategory[] = [
 // --- CLIENTS DATA ---
 const CLIENTS: Client[] = [
     { name: "Pepsico International - Frito Lay", logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a6/PepsiCo_logo.svg/1200px-PepsiCo_logo.svg.png", type: "completed" },
-    { name: "H & R. Johnson (I.) Limited", logo: "https://d2ki7eiqd260sq.cloudfront.net/CORPORATE-LOGO-NEW6130d7d5-8c2c-41c1-8918-e01f2fa1be73.png", type: "completed" },
     { name: "Grindwell - Nortan", logo: "https://companieslogo.com/img/orig/GRINDWELL.NS-155a919c.png?t=1720244492", type: "completed" },
-    { name: "Alta Laboratories Ltd", logo: "https://www.pharmacompass.com/image/logo/alta-laboratories-1652261249.png", type: "completed" },
     { name: "Colt Cables Limited", logo: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRPbJNdw2MoTkIEsq6yeodbeXeHO_CpWh1pQw&s", type: "completed" },
     { name: "Indo Rama Cements Ltd", logo: "https://upload.wikimedia.org/wikipedia/commons/7/7c/INDORAMA.jpg", type: "completed" },
     { name: "Ispat Industries Limited", logo: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSOF4o8a3P__AGJ2J2-YN-c2Mbz8ojrVQUO7g&s", type: "completed" },
     { name: "Khopoli Municipal Council", logo: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSKL-KUveVs56V4BYYzDxYxoBYvQYTf6StJqQ&s", type: "completed" },
-    // --- FIX: Use the imported variable for Krantivan ---
     { name: "Krantivan", logo: krantivanLogo, type: "completed" },
     { name: "Lona Industries Limited", logo: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSjxlXhBdv0QU9mzSU5o7Vwj75Fh_94SAKoEw&s", type: "completed" },
-    { name: "M/s East Coast Constructions Limited", logo: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSFkyeE3PLGh4rgjwLFySVWP596M4yGo7rGIQ&s", type: "completed" },
-    { name: "M/s Penguin Petrochemicals Private Limited", logo: "https://www.penguinpetro.com/images/penguin-logo.png", type: "completed" },
-    { name: "M/s Wartsila India Limited", logo: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRnPlZ-tc4dUO6aUws5hfoWy2i3nZhqd5h4Eg&s", type: "completed" },
+    { name: "East Coast Constructions Limited", logo: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSFkyeE3PLGh4rgjwLFySVWP596M4yGo7rGIQ&s", type: "completed" },
+    { name: "Penguin Petrochemicals Private Limited", logo: "https://www.penguinpetro.com/images/penguin-logo.png", type: "completed" },
+    { name: "Wartsila India Limited", logo: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRnPlZ-tc4dUO6aUws5hfoWy2i3nZhqd5h4Eg&s", type: "completed" },
     { name: "Neelam Power Plant", logo: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQxtPGKIAiRzdCu-m7lBeg0wqRaR3JnPVNxFQ&s", type: "completed" },
     { name: "Ravin Cables Limited", logo: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSL2Dz1b4bSbphY_MmglgAG3-EXggNmSaTs_w&s", type: "completed" },
-    { name: "Renuka Sugar", logo: "https://indianpsu.com/wp-content/uploads/2023/05/Shree-Renuka-Sugars-Limited-Logo-3.jpg", type: "completed" },
-    { name: "SKI Carbon", logo: "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgZmlsbD0iI2Y1ZjVmNSIvPjx0ZXh0IHg9IjUwJSIgeT0iNTAlIiBmb250LXNpemU9IjE2IiBmaWxsPSIjNjY2IiB0ZXh0LWFuYGhvci0ibWlkZGxlIiBkb21pbmFudC1iYXNlbGluZT0ibWlkZGxlIj5TS0k8L3RleHQ+PC9zdmc+", type: "completed" },
     { name: "Simplex Concrete Piles India Limited", logo: "https://tipl.triamtmt.com/wp-content/uploads/2025/05/9.jpg", type: "completed" },
     { name: "Uttam Galva Steels Limited", logo: "https://www.equitybulls.com/equitybullsadmin/uploads/Uttam%20Galva%20Steels%20Limited%203.jpg", type: "completed" },
 ];
@@ -174,10 +169,10 @@ const CLIENTS: Client[] = [
 // --- ACTIVE VENDORS LIST ---
 const ACTIVE_VENDORS: Client[] = [
     { name: "AM/NS India", logo: "https://travel.amns.in/static/media/amns_transparent.bf237bba696c0751e0b1.png", type: "vendor" },
-    { name: "SKI Carbon", logo: "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgZmlsbD0iI2Y1ZjVmNSIvPjx0ZXh0IHg9IjUwJSIgeT0iNTAlIiBmb250LXNpemU9IjE2IiBmaWxsPSIjNjY2IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBkb21pbmFudC1iYXNlbGluZT0ibWlkZGxlIj5TS0k8L3RleHQ+PC9zdmc+", type: "vendor" },
+    { name: "SKI Carbon", logo: "https://www.birlacarbon.com/wp-content/uploads/2017/01/aditya-birla-logo-retina.png", type: "vendor" },
     { name: "Alta Laboratories Ltd", logo: "https://www.pharmacompass.com/image/logo/alta-laboratories-1652261249.png", type: "vendor" },
+    { name: "H & R. Johnson (I.) Limited", logo: "https://d2ki7eiqd260sq.cloudfront.net/CORPORATE-LOGO-NEW6130d7d5-8c2c-41c1-8918-e01f2fa1be73.png", type: "completed" },
     { name: "Renuka Sugar", logo: "https://indianpsu.com/wp-content/uploads/2023/05/Shree-Renuka-Sugars-Limited-Logo-3.jpg", type: "vendor" },
-    // --- FIX: Use the imported variable for Jindal ---
     { name: "Jindal Stainless Steelway", logo: jindalLogo, type: "vendor" },
 ];
 
@@ -230,7 +225,7 @@ const Header: React.FC<{ onNavigate: (page: string) => void, currentPage: string
                 <div className="flex items-center justify-between h-20">
                     <div className="flex-shrink-0">
                         <a href="/" onClick={(e) => handleLinkClick(e, '/')} className="flex items-center gap-3">
-                            <img className="h-16 w-auto p-1 bg-white rounded-md" src={logo} alt="Patil and Company (P and Co) Logo" />
+                            <img className="h-16 w-auto p-1 bg-white rounded-md" src={logo} alt="Patil and Company Logo" />
                             <span className="font-bold text-xl text-gray-800 hidden sm:inline-block">Patil and Company</span>
                         </a>
                     </div>
@@ -310,7 +305,7 @@ const Footer: React.FC<{ onNavigate: (page: string) => void }> = ({ onNavigate }
                             className="h-12 bg-white p-1 rounded-md"
                         />
                         <p className="ml-4 text-sm">
-                            &copy; {new Date().getFullYear()} Patil and Company (P and Co).
+                            &copy; {new Date().getFullYear()} Patil and Company.
                         </p>
                     </div>
 
@@ -496,18 +491,7 @@ const ClientsPage: React.FC = () => {
         <section id="clients" className="py-20 bg-gray-50 fade-in-section min-h-screen" ref={sectionRef}>
             <div className="container mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="text-center mb-12">
-                    <h2 className="text-3xl font-extrabold text-gray-900 sm:text-4xl">Our Clients & Vendors</h2>
-                    <p className="mt-4 text-lg text-gray-600">Our Commitment to Quality has Earned Their Trust</p>
-                    <div className="flex justify-center gap-6 mt-6 text-sm">
-                        <div className="flex items-center gap-2">
-                            <div className="w-4 h-4 border-4 border-gray-800 bg-white rounded-sm"></div>
-                            <span>Completed Clients</span>
-                        </div>
-                        <div className="flex items-center gap-2">
-                            <div className="w-4 h-4 border-4 border-green-500 bg-white rounded-sm"></div>
-                            <span>Active Vendors</span>
-                        </div>
-                    </div>
+                    <h2 className="text-3xl font-extrabold text-gray-900 sm:text-4xl">Our Clients</h2>                
                 </div>
                 <div>
                     {renderClientList(sortedAllClients)}
@@ -532,7 +516,7 @@ const ContactPage: React.FC = () => {
                         <h3 className="text-2xl font-bold text-gray-800 mb-4">Contact Details</h3>
                         <p className="text-gray-600 mb-6">For business inquiries write to, call, email or WhatsApp us.</p>
                         <div className="space-y-4">
-                            <div className="flex items-start"><i data-lucide="map-pin" className="w-5 h-5 text-yellow-600 mr-4 mt-1 flex-shrink-0"></i><div><h4 className="font-semibold text-gray-800">Address</h4><p className="text-gray-600">Patil and Company (P and Co)<br/>House No 45, At Navandhe, Post Jambrung<br/>Tal. Khalapur, Dist. Raigad<br/>Maharashtra - 410203</p></div></div>
+                            <div className="flex items-start"><i data-lucide="map-pin" className="w-5 h-5 text-yellow-600 mr-4 mt-1 flex-shrink-0"></i><div><h4 className="font-semibold text-gray-800">Address</h4><p className="text-gray-600">Patil and Company<br/>House No 45, At Navandhe, Post Jambrung<br/>Tal. Khalapur, Dist. Raigad<br/>Maharashtra - 410203</p></div></div>
                             <div className="flex items-start"><i data-lucide="mail" className="w-5 h-5 text-yellow-600 mr-4 mt-1 flex-shrink-0"></i><div><h4 className="font-semibold text-gray-800">Email</h4><a href="mailto:patilandcom@gmail.com" className="text-yellow-600 hover:text-yellow-700">patilandcom@gmail.com</a></div></div>
                             <div className="flex items-start"><i data-lucide="phone" className="w-5 h-5 text-yellow-600 mr-4 mt-1 flex-shrink-0"></i><div><h4 className="font-semibold text-gray-800">Telephone</h4><a href="tel:9823382053" className="block text-gray-600 hover:text-yellow-600">9823382053</a><a href="tel:9422094539" className="block text-gray-600 hover:text-yellow-600">9422094539</a><a href="tel:9923214165" className="block text-gray-600 hover:text-yellow-600">9923214165</a><a href="tel:9158444165" className="block text-gray-600 hover:text-yellow-600">9158444165</a></div></div>
                         </div>
