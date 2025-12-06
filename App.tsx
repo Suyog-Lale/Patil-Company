@@ -27,10 +27,6 @@ interface Client {
   type: 'completed' | 'ongoing' | 'vendor'; // Added 'vendor' type
 }
 
-// Project types removed as they are no longer needed
-// type ProjectCategory = 'Industrial' | 'Commercial' | 'Residential';
-// interface Project { ... }
-
 // --- CONSTANTS (from constants.ts) ---
 // Using page paths for hash routing
 // UPDATED: Removed Projects and Policies
@@ -189,9 +185,6 @@ const ACTIVE_VENDORS: Client[] = [
     { name: "Renuka Sugar", logo: "https://indianpsu.com/wp-content/uploads/2023/05/Shree-Renuka-Sugars-Limited-Logo-3.jpg", type: "vendor" },
     { name: "Jindal Stainless Steelway", logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/2/24/Jindal_Stainless_Logo.svg/1200px-Jindal_Stainless_Logo.svg.png", type: "vendor" },
 ];
-
-// --- PROJECTS CONSTANT REMOVED ---
-// const PROJECTS: Project[] = [ ... ];
 
 
 // --- HOOKS (from hooks/useScrollAnimation.ts) ---
@@ -437,9 +430,9 @@ const ServicesPage: React.FC = () => {
                     <div className="mb-8 border-b border-gray-200">
                         <div className="flex flex-wrap -mb-px justify-center" role="tablist" aria-orientation="horizontal">
                             {SERVICE_CATEGORIES.map((category, index) => (
-                                <button
-                                    key={category.name}
-                                    onClick={() => setActiveTab(index)}
+                                <button 
+                                    key={category.name} 
+                                    onClick={() => setActiveTab(index)} 
                                     className={`py-4 px-1 mx-2 sm:mx-4 border-b-2 text-sm sm:text-base font-medium transition-colors duration-300 ${activeTab === index ? 'border-yellow-600 text-yellow-600' : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'}`}
                                     role="tab"
                                     aria-selected={activeTab === index}
@@ -454,8 +447,8 @@ const ServicesPage: React.FC = () => {
                     {/* --- TAB PANELS --- */}
                     <div className="bg-gray-50 p-8 rounded-lg shadow-inner">
                         {SERVICE_CATEGORIES.map((category, index) => (
-                            <div
-                                key={category.name}
+                            <div 
+                                key={category.name} 
                                 className={`${activeTab === index ? 'block' : 'hidden'}`}
                                 role="tabpanel"
                                 tabIndex={0}
@@ -483,39 +476,53 @@ const ServicesPage: React.FC = () => {
     );
 };
 
-// --- UPDATED CLIENTS PAGE COMPONENT ---
+// --- UPDATED CLIENTS PAGE COMPONENT WITH UNIFIED LIST ---
 const ClientsPage: React.FC = () => {
     const sectionRef = useScrollAnimation<HTMLElement>();
-    const [activeTab, setActiveTab] = useState<'completed' | 'vendors'>('completed');
+    // No activeTab state needed as we are showing all clients in one view
 
-    const completedClients = CLIENTS.filter(c => c.type === 'completed');
-    // We already defined ACTIVE_VENDORS as a global constant
+    // --- SORTING AND COMBINING ---
+    // 1. Combine both lists into a single array
+    const allClients = [...CLIENTS, ...ACTIVE_VENDORS];
+    
+    // 2. Sort the combined list alphabetically by name
+    const sortedAllClients = allClients.sort((a, b) => a.name.localeCompare(b.name));
 
-    // Helper function to render a list of clients
+    // Helper function to render a list of clients with specific styling based on type
     const renderClientList = (clients: Client[]) => (
         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6">
-            {clients.map((client) => (
-                <div key={client.name} className="flex flex-col justify-between items-center text-center p-4 bg-white border border-gray-200 rounded-lg h-32 hover:shadow-md transition-shadow">
-                    <div className="flex-grow flex items-center justify-center w-full h-full overflow-hidden"> {/* Ensure container fills space */}
-                        {/* Make image responsive and centered */}
-                        <img
-                           src={client.logo || 'https://placehold.co/100x60/eee/ccc?text=Logo'} // Fallback placeholder
-                           alt={client.name}
-                           className="max-h-16 max-w-[80%] client-logo object-contain mx-auto" // Control size, center
-                           onError={(e) => {
-                             const target = e.target as HTMLImageElement;
-                             target.onerror = null; // Prevent infinite loop
-                             target.src='https://placehold.co/100x60/eee/ccc?text=Error'; // Error placeholder
-                           }}
-                        />
+            {clients.map((client, index) => {
+                // Determine border color based on client type
+                const borderColorClass = client.type === 'vendor' ? 'border-green-500' : 'border-gray-800';
+                
+                return (
+                    <div 
+                      // Use index in key to ensure uniqueness if names duplicate (e.g. same company in both lists)
+                      key={`${client.name}-${index}`} 
+                      // Dynamic border color class
+                      // --- FIX: CHANGED BORDER WIDTH FROM 2 to 4 ---
+                      className={`flex flex-col justify-between items-center text-center p-4 bg-white border-4 ${borderColorClass} rounded-lg h-40 hover:shadow-md transition-shadow`}
+                    >
+                        <div className="flex-grow flex items-center justify-center w-full h-full overflow-hidden">
+                            <img
+                               src={client.logo || 'https://placehold.co/100x60/eee/ccc?text=Logo'}
+                               alt={client.name}
+                               className="max-h-16 max-w-[80%] client-logo object-contain mx-auto"
+                               onError={(e) => {
+                                 const target = e.target as HTMLImageElement;
+                                 target.onerror = null;
+                                 target.src='https://placehold.co/100x60/eee/ccc?text=Error';
+                               }}
+                            />
+                        </div>
+                        <p className="text-xs sm:text-sm font-medium text-gray-700 mt-2 text-center break-words w-full px-1">
+                            {client.name}
+                        </p>
                     </div>
-                    {/* Ensure text wraps and is centered */}
-                    <p className="text-xs sm:text-sm font-medium text-gray-700 mt-2 text-center break-words w-full">{client.name}</p>
-                </div>
-            ))}
+                );
+            })}
         </div>
     );
-
 
     return (
         <section id="clients" className="py-20 bg-gray-50 fade-in-section min-h-screen" ref={sectionRef}>
@@ -523,38 +530,24 @@ const ClientsPage: React.FC = () => {
                 <div className="text-center mb-12">
                     <h2 className="text-3xl font-extrabold text-gray-900 sm:text-4xl">Our Clients & Vendors</h2>
                     <p className="mt-4 text-lg text-gray-600">Our Commitment to Quality has Earned Their Trust</p>
+                    {/* Added legend for clarity */}
+                    <div className="flex justify-center gap-6 mt-6 text-sm">
+                        <div className="flex items-center gap-2">
+                            {/* --- FIX: CHANGED BORDER WIDTH FROM 2 to 4 --- */}
+                            <div className="w-4 h-4 border-4 border-gray-800 bg-white rounded-sm"></div>
+                            <span>Completed Clients</span>
+                        </div>
+                        <div className="flex items-center gap-2">
+                            {/* --- FIX: CHANGED BORDER WIDTH FROM 2 to 4 --- */}
+                            <div className="w-4 h-4 border-4 border-green-500 bg-white rounded-sm"></div>
+                            <span>Active Vendors</span>
+                        </div>
+                    </div>
                 </div>
 
-                {/* --- TABS for Clients/Vendors --- */}
-                <div className="flex justify-center flex-wrap gap-2 mb-10">
-                    <button
-                        onClick={() => setActiveTab('completed')}
-                        className={`px-6 py-2 rounded-full font-medium text-sm transition-colors ${activeTab === 'completed' ? 'bg-yellow-600 text-white' : 'bg-gray-200 text-gray-700 hover:bg-gray-300'}`}
-                    >
-                        Completed Clients
-                    </button>
-                    <button
-                        onClick={() => setActiveTab('vendors')}
-                        className={`px-6 py-2 rounded-full font-medium text-sm transition-colors ${activeTab === 'vendors' ? 'bg-yellow-600 text-white' : 'bg-gray-200 text-gray-700 hover:bg-gray-300'}`}
-                    >
-                        Active Vendors
-                    </button>
-                </div>
-
-                {/* --- Conditional Content --- */}
+                {/* --- Unified List Content --- */}
                 <div>
-                    {activeTab === 'completed' && (
-                        <div>
-                            <h3 className="text-2xl font-bold text-gray-800 mb-6 text-center">Completed Client Work</h3>
-                            {renderClientList(completedClients)}
-                        </div>
-                    )}
-                    {activeTab === 'vendors' && (
-                         <div>
-                            <h3 className="text-2xl font-bold text-gray-800 mb-6 text-center">Active Vendors</h3>
-                            {renderClientList(ACTIVE_VENDORS)}
-                        </div>
-                    )}
+                    {renderClientList(sortedAllClients)}
                 </div>
             </div>
         </section>
@@ -563,10 +556,7 @@ const ClientsPage: React.FC = () => {
 // --- END OF UPDATED CLIENTS PAGE ---
 
 
-// --- PROJECTS PAGE COMPONENT REMOVED ---
-// const ProjectsPage: React.FC = () => { ... };
-
-// --- UPDATED CONTACT PAGE ---
+// --- CONTACT PAGE ---
 const ContactPage: React.FC = () => {
     const sectionRef = useScrollAnimation<HTMLElement>();
     return (
