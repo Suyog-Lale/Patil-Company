@@ -5,7 +5,7 @@ import logo from "./assets/logo.jpeg";
 // Make sure these filenames match exactly what is in your assets folder
 import jindalLogo from "./assets/Jindal_Steel_Limited_Logo.png"; 
 import krantivanLogo from "./assets/krantivan_logo.jpg"; 
-
+import SimplexLogo from "./assets/simplexcompanylogo.png"; 
 // --- TYPES ---
 interface NavLink {
   name: string;
@@ -163,7 +163,7 @@ const CLIENTS: Client[] = [
     { name: "Neelam Power Plant", logo: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQxtPGKIAiRzdCu-m7lBeg0wqRaR3JnPVNxFQ&s", type: "completed" },
     { name: "Ravin Cables Limited", logo: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSL2Dz1b4bSbphY_MmglgAG3-EXggNmSaTs_w&s", type: "completed" },
     { name: "Simplex Concrete Piles India Limited", logo: "https://tipl.triamtmt.com/wp-content/uploads/2025/05/9.jpg", type: "completed" },
-    { name: "Uttam Galva Steels Limited", logo: "https://www.equitybulls.com/equitybullsadmin/uploads/Uttam%20Galva%20Steels%20Limited%203.jpg", type: "completed" },
+    { name: "Uttam Galva Steels Limited", logo: SimplexLogo , type: "completed" },
 ];
 
 // --- ACTIVE VENDORS LIST ---
