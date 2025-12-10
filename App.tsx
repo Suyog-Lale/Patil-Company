@@ -1,11 +1,16 @@
 import React, { useState, useEffect, useRef } from "react";
-// --- FIXED IMPORTS ---
-// We import images so the build tool knows to bundle them correctly
+// --- IMPORTS ---
+// Ensure these paths match your actual folder structure
 import logo from "./assets/logo.jpeg";
-// Make sure these filenames match exactly what is in your assets folder
 import jindalLogo from "./assets/Jindal_Steel_Limited_Logo.png"; 
 import krantivanLogo from "./assets/krantivan_logo.jpg"; 
 import SimplexLogo from "./assets/simplexcompanylogo.png"; 
+
+// --- GLOBAL SETTINGS ---
+// UPDATE THIS DATE HERE to change it everywhere on the site
+const SITE_LAST_UPDATED = "December 10, 2025"; 
+
+
 // --- TYPES ---
 interface NavLink {
   name: string;
@@ -232,17 +237,12 @@ const Header: React.FC<{ onNavigate: (page: string) => void, currentPage: string
                     <div className="hidden md:block">
                         <nav className="ml-10 flex items-baseline space-x-4">
                             {NAV_LINKS.map((link) => {
-                                // Determine if this link is currently active
                                 const isActive = currentPage === link.href || (currentPage === '/' && link.href === '/');
-                                
                                 return (
                                     <a
                                         key={link.name}
                                         href={link.href}
                                         onClick={(e) => handleLinkClick(e, link.href)}
-                                        // Dynamic Styling: 
-                                        // If active -> Yellow Background + White Text
-                                        // If not active -> Gray Text + Hover effect
                                         className={`${
                                             isActive 
                                                 ? 'bg-yellow-600 text-white shadow-md' 
@@ -298,22 +298,29 @@ const Footer: React.FC<{ onNavigate: (page: string) => void }> = ({ onNavigate }
         onNavigate(href);
     };
     
-    // Using the constant but adding Policies for footer only
     const footerLinks = [...NAV_LINKS, { name: "Policies", href: "/policies" }];
 
     return (
         <footer className="bg-gray-800 text-gray-400 border-t border-gray-700">
             <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-                <div className="flex flex-col sm:flex-row items-center justify-between h-24">
-                    <div className="flex items-center mb-4 sm:mb-0">
-                        <img
-                            src={logo} 
-                            alt="Patil and Company Logo"
-                            className="h-12 bg-white p-1 rounded-md"
-                        />
-                        <p className="ml-4 text-sm">
-                            &copy; {new Date().getFullYear()} Patil and Company.
-                        </p>
+                <div className="flex flex-col sm:flex-row items-center justify-between py-8">
+                    <div className="flex flex-col mb-4 sm:mb-0">
+                        <div className="flex items-center">
+                            <img
+                                src={logo} 
+                                alt="Patil and Company Logo"
+                                className="h-12 bg-white p-1 rounded-md"
+                            />
+                            <div className="ml-4">
+                                <p className="text-sm font-semibold text-white">
+                                    &copy; {new Date().getFullYear()} Patil and Company.
+                                </p>
+                                {/* --- UPDATED: VISIBLE LAST UPDATE --- */}
+                                <p className="text-xs text-gray-500 mt-1">
+                                    Last Updated: <span className="text-gray-400">{SITE_LAST_UPDATED}</span> 
+                                </p>
+                            </div>
+                        </div>
                     </div>
 
                     <nav>
@@ -539,7 +546,8 @@ const PoliciesPage: React.FC = () => (
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="max-w-3xl mx-auto bg-white p-8 rounded-lg shadow-md border border-gray-200">
           <h2 className="text-3xl font-bold text-center text-gray-900 mb-4">Website Policies</h2>
-          <p className="text-center text-gray-500 mb-10">Last Updated: October 20, 2025</p>
+          {/* --- UPDATED: Uses the global variable --- */}
+          <p className="text-center text-gray-500 mb-10">Last Updated: {SITE_LAST_UPDATED}</p>
           <div className="space-y-6 text-gray-700 text-left">
              <div className="space-y-2">
                 <h3 className="text-xl font-semibold text-gray-800">Acceptance of Terms</h3>
