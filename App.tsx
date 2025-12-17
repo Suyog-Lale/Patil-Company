@@ -167,8 +167,8 @@ const CLIENTS: Client[] = [
     { name: "Wartsila India Limited", logo: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRnPlZ-tc4dUO6aUws5hfoWy2i3nZhqd5h4Eg&s", type: "completed" },
     { name: "Neelam Power Plant", logo: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQxtPGKIAiRzdCu-m7lBeg0wqRaR3JnPVNxFQ&s", type: "completed" },
     { name: "Ravin Cables Limited", logo: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSL2Dz1b4bSbphY_MmglgAG3-EXggNmSaTs_w&s", type: "completed" },
-    { name: "Simplex Concrete Piles India Limited", logo: "https://tipl.triamtmt.com/wp-content/uploads/2025/05/9.jpg", type: "completed" },
-    { name: "Uttam Galva Steels Limited", logo: SimplexLogo , type: "completed" },
+    { name: "Simplex Concrete Piles India Limited", logo: SimplexLogo, type: "completed" },
+    { name: "Uttam Galva Steels Limited", logo: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSFhBPjf0PPEDoIBKt7JWkZL2bXeKgCOR03VQ&s", type: "completed" },
 ];
 
 // --- ACTIVE VENDORS LIST ---
