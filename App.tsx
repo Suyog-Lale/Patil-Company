@@ -1,10 +1,30 @@
 import React, { useState, useEffect, useRef } from "react";
 // --- IMPORTS ---
-// Ensure these paths match your actual folder structure
 import logo from "./assets/logo.jpeg";
+
+// Client & Vendor Logos (Importing directly from assets folder)
 import jindalLogo from "./assets/Jindal_Steel_Limited_Logo.png"; 
 import krantivanLogo from "./assets/krantivan_logo.jpg"; 
-import SimplexLogo from "./assets/simplexcompanylogo.png"; 
+import simplexLogo from "./assets/simplexcompanylogo.png";
+import pepsicoLogo from "./assets/PepsiCo_logo.svg.png";
+import grindwellLogo from "./assets/GRINDWELL.NS-155a919c.png";
+import coltLogo from "./assets/colt_logo.png";
+import indoramaLogo from "./assets/INDORAMA.jpg";
+import ispatLogo from "./assets/ispat_logo.png";
+// Note: Keeping the filename typo "Muncipal" as shown in your assets folder
+import khopoliLogo from "./assets/KhopoliMuncipal_logo.jpg";
+import lonaLogo from "./assets/lona_logo.png";
+import eastCoastLogo from "./assets/Eastcoast_logo.jpg";
+import penguinLogo from "./assets/penguin-logo.png";
+import wartsilaLogo from "./assets/wartsila_logo.png";
+import neelamLogo from "./assets/neelam_logo.jpg";
+import ravinLogo from "./assets/Ravin_logo.png";
+import uttamLogo from "./assets/uttam_logo.jpg";
+import amnsLogo from "./assets/amns_logo.png";
+import skiCarbonLogo from "./assets/aditya-birla-logo.webp";
+import johnsonLogo from "./assets/Johnson_logo.png";
+import renukaLogo from "./assets/Shree-Renuka-Sugars-Limited-Logo.jpg";
+import altaLogo from "./assets/alta-laboratories-1652261249.png";
 
 // --- GLOBAL SETTINGS ---
 // UPDATE THIS DATE HERE to change it everywhere on the site
@@ -154,30 +174,30 @@ const SERVICE_CATEGORIES: ServiceCategory[] = [
 
 // --- CLIENTS DATA ---
 const CLIENTS: Client[] = [
-    { name: "Pepsico International - Frito Lay", logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a6/PepsiCo_logo.svg/1200px-PepsiCo_logo.svg.png", type: "completed" },
-    { name: "Grindwell - Nortan", logo: "https://companieslogo.com/img/orig/GRINDWELL.NS-155a919c.png?t=1720244492", type: "completed" },
-    { name: "Colt Cables Limited", logo: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRPbJNdw2MoTkIEsq6yeodbeXeHO_CpWh1pQw&s", type: "completed" },
-    { name: "Indo Rama Cements Ltd", logo: "https://upload.wikimedia.org/wikipedia/commons/7/7c/INDORAMA.jpg", type: "completed" },
-    { name: "Ispat Industries Limited", logo: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSOF4o8a3P__AGJ2J2-YN-c2Mbz8ojrVQUO7g&s", type: "completed" },
-    { name: "Khopoli Municipal Council", logo: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSKL-KUveVs56V4BYYzDxYxoBYvQYTf6StJqQ&s", type: "completed" },
+    { name: "Pepsico International - Frito Lay", logo: pepsicoLogo, type: "completed" },
+    { name: "Grindwell - Nortan", logo: grindwellLogo, type: "completed" },
+    { name: "Colt Cables Limited", logo: coltLogo, type: "completed" },
+    { name: "Indo Rama Cements Ltd", logo: indoramaLogo, type: "completed" },
+    { name: "Ispat Industries Limited", logo: ispatLogo, type: "completed" },
+    { name: "Khopoli Municipal Council", logo: khopoliLogo, type: "completed" },
     { name: "Krantivan", logo: krantivanLogo, type: "completed" },
-    { name: "Lona Industries Limited", logo: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSjxlXhBdv0QU9mzSU5o7Vwj75Fh_94SAKoEw&s", type: "completed" },
-    { name: "East Coast Constructions Limited", logo: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSFkyeE3PLGh4rgjwLFySVWP596M4yGo7rGIQ&s", type: "completed" },
-    { name: "Penguin Petrochemicals Private Limited", logo: "https://www.penguinpetro.com/images/penguin-logo.png", type: "completed" },
-    { name: "Wartsila India Limited", logo: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRnPlZ-tc4dUO6aUws5hfoWy2i3nZhqd5h4Eg&s", type: "completed" },
-    { name: "Neelam Power Plant", logo: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQxtPGKIAiRzdCu-m7lBeg0wqRaR3JnPVNxFQ&s", type: "completed" },
-    { name: "Ravin Cables Limited", logo: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSL2Dz1b4bSbphY_MmglgAG3-EXggNmSaTs_w&s", type: "completed" },
-    { name: "Simplex Concrete Piles India Limited", logo: SimplexLogo, type: "completed" },
-    { name: "Uttam Galva Steels Limited", logo: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSFhBPjf0PPEDoIBKt7JWkZL2bXeKgCOR03VQ&s", type: "completed" },
+    { name: "Lona Industries Limited", logo: lonaLogo, type: "completed" },
+    { name: "East Coast Constructions Limited", logo: eastCoastLogo, type: "completed" },
+    { name: "Penguin Petrochemicals Private Limited", logo: penguinLogo, type: "completed" },
+    { name: "Wartsila India Limited", logo: wartsilaLogo, type: "completed" },
+    { name: "Neelam Power Plant", logo: neelamLogo, type: "completed" },
+    { name: "Ravin Cables Limited", logo: ravinLogo, type: "completed" },
+    { name: "Simplex Concrete Piles India Limited", logo: simplexLogo, type: "completed" },
+    { name: "Uttam Galva Steels Limited", logo: uttamLogo, type: "completed" },
 ];
 
 // --- ACTIVE VENDORS LIST ---
 const ACTIVE_VENDORS: Client[] = [
-    { name: "AM/NS India", logo: "https://travel.amns.in/static/media/amns_transparent.bf237bba696c0751e0b1.png", type: "vendor" },
-    { name: "SKI Carbon", logo: "https://www.birlacarbon.com/wp-content/uploads/2017/01/aditya-birla-logo-retina.png", type: "vendor" },
-    { name: "Alta Laboratories Ltd", logo: "https://www.pharmacompass.com/image/logo/alta-laboratories-1652261249.png", type: "vendor" },
-    { name: "H & R. Johnson (I.) Limited", logo: "https://d2ki7eiqd260sq.cloudfront.net/CORPORATE-LOGO-NEW6130d7d5-8c2c-41c1-8918-e01f2fa1be73.png", type: "vendor" },
-    { name: "Renuka Sugar", logo: "https://indianpsu.com/wp-content/uploads/2023/05/Shree-Renuka-Sugars-Limited-Logo-3.jpg", type: "vendor" },
+    { name: "AM/NS India", logo: amnsLogo, type: "vendor" },
+    { name: "SKI Carbon", logo: skiCarbonLogo, type: "vendor" },
+    { name: "Alta Laboratories Ltd", logo: altaLogo, type: "vendor" },
+    { name: "H & R. Johnson (I.) Limited", logo: johnsonLogo, type: "vendor" },
+    { name: "Renuka Sugar", logo: renukaLogo, type: "vendor" },
     { name: "Jindal Stainless Steelway", logo: jindalLogo, type: "vendor" },
 ];
 
