@@ -2,7 +2,10 @@ import React, { useState, useEffect, useRef } from "react";
 // --- IMPORTS ---
 import logo from "./assets/logo.jpeg";
 
-// Client & Vendor Logos (Importing directly from assets folder)
+// --- GLOBAL SETTINGS ---
+const SITE_LAST_UPDATED = "December 10, 2025"; 
+
+// Client & Vendor Logos
 import jindalLogo from "./assets/Jindal_Steel_Limited_Logo.png"; 
 import krantivanLogo from "./assets/krantivan_logo.jpg"; 
 import simplexLogo from "./assets/simplexcompanylogo.png";
@@ -11,7 +14,6 @@ import grindwellLogo from "./assets/GRINDWELL.NS-155a919c.png";
 import coltLogo from "./assets/colt_logo.png";
 import indoramaLogo from "./assets/INDORAMA.jpg";
 import ispatLogo from "./assets/ispat_logo.png";
-// Note: Keeping the filename typo "Muncipal" as shown in your assets folder
 import khopoliLogo from "./assets/KhopoliMuncipal_logo.jpg";
 import lonaLogo from "./assets/lona_logo.png";
 import eastCoastLogo from "./assets/Eastcoast_logo.jpg";
@@ -25,11 +27,6 @@ import skiCarbonLogo from "./assets/aditya-birla-logo.webp";
 import johnsonLogo from "./assets/Johnson_logo.png";
 import renukaLogo from "./assets/Shree-Renuka-Sugars-Limited-Logo.jpg";
 import altaLogo from "./assets/alta-laboratories-1652261249.png";
-
-// --- GLOBAL SETTINGS ---
-// UPDATE THIS DATE HERE to change it everywhere on the site
-const SITE_LAST_UPDATED = "December 10, 2025"; 
-
 
 // --- TYPES ---
 interface NavLink {
@@ -335,9 +332,12 @@ const Footer: React.FC<{ onNavigate: (page: string) => void }> = ({ onNavigate }
                                 <p className="text-sm font-semibold text-white">
                                     &copy; {new Date().getFullYear()} Patil and Company.
                                 </p>
-                                {/* --- UPDATED: VISIBLE LAST UPDATE --- */}
                                 <p className="text-xs text-gray-500 mt-1">
                                     Last Updated: <span className="text-gray-400">{SITE_LAST_UPDATED}</span> 
+                                </p>
+                                {/* ADDED: CREATED BY SUYOG LALE */}
+                                <p className="text-xs text-gray-500 mt-0.5 italic">
+                                    Created by Suyog Lale
                                 </p>
                             </div>
                         </div>
@@ -566,7 +566,6 @@ const PoliciesPage: React.FC = () => (
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="max-w-3xl mx-auto bg-white p-8 rounded-lg shadow-md border border-gray-200">
           <h2 className="text-3xl font-bold text-center text-gray-900 mb-4">Website Policies</h2>
-          {/* --- UPDATED: Uses the global variable --- */}
           <p className="text-center text-gray-500 mb-10">Last Updated: {SITE_LAST_UPDATED}</p>
           <div className="space-y-6 text-gray-700 text-left">
              <div className="space-y-2">
@@ -645,7 +644,6 @@ const App: React.FC = () => {
     };
 
     const [currentPage, setCurrentPage] = useState(getInitialPage());
-    // FIXED: Initialize state by checking localStorage first
     const [isSiteEntered, setIsSiteEntered] = useState(() => {
         return localStorage.getItem('site_entered') === 'true';
     });
@@ -673,7 +671,6 @@ const App: React.FC = () => {
     };
 
     const handleEnter = () => {
-        // FIXED: Save 'true' to localStorage when user enters
         localStorage.setItem('site_entered', 'true');
         setIsSiteEntered(true);
         handleNavigate(getInitialPage());

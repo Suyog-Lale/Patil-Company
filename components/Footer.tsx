@@ -2,6 +2,9 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { NAV_LINKS, MAIN_LOGO } from '../constants';
 
+// Define the date locally to ensure the "Cannot find name" error is resolved
+const SITE_LAST_UPDATED = "December 10, 2025";
+
 const Footer: React.FC = () => {
   // We add "Contact" to the navigation links for the footer
   const footerLinks = [...NAV_LINKS, { name: "Contact", href: "/contact" }];
@@ -19,9 +22,18 @@ const Footer: React.FC = () => {
               alt="Patil and Company Logo" 
               className="h-12 bg-white p-1 rounded-md" 
             />
-            <p className="ml-4 text-sm">
-              &copy; Patil and Company (P and Co).
-            </p>
+            <div className="ml-4 flex flex-col justify-center">
+              <p className="text-sm font-semibold text-white">
+                &copy; {new Date().getFullYear()} Patil and Company (P and Co).
+              </p>
+              <p className="text-xs text-gray-500 mt-1">
+                Last Updated: <span className="text-gray-400">{SITE_LAST_UPDATED}</span>
+              </p>
+              {/* This is the line you requested */}
+              <p className="text-xs text-gray-400 mt-0.5 italic">
+                Created by Suyog Lale
+              </p>
+            </div>
           </div>
 
           {/* Right Side: Horizontal Quick Links */}
@@ -47,4 +59,3 @@ const Footer: React.FC = () => {
 };
 
 export default Footer;
-
